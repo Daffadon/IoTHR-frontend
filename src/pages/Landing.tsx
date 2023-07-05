@@ -1,4 +1,4 @@
-const Landing: React.FC = () => {
+const Landing = () => {
   return <div>Landing</div>;
 };
 

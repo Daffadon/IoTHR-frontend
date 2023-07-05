@@ -1,11 +1,14 @@
-import { createBrowserRouter } from 'react-router-dom';
-import { RouterProvider } from 'react-router-dom';
-import {} from 'react-router-dom';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Landing from '../pages/Landing';
 import NotFound from '../pages/NotFound';
-import PublicRoute from './PublicRoute';
-import PrivateRoute from './PrivateRoute';
+import PublicRoute from './visibility/PublicRoute';
+import PrivateRoute from './visibility/PrivateRoute';
 import Login from '../pages/Login';
+import Home from '../pages/Home';
+import AdminRoute from './role/AdminRoute';
+import UserRoute from './role/UserRoute';
+import Admin from '../pages/Admin';
+import User from '../pages/User';
 
 const createRouter = createBrowserRouter([
   {
@@ -17,7 +20,7 @@ const createRouter = createBrowserRouter([
         element: <Landing />
       },
       {
-        path: 'login/',
+        path: '/login',
         element: <Login />
       }
     ]
@@ -27,10 +30,31 @@ const createRouter = createBrowserRouter([
     element: <PrivateRoute />,
     children: [
       {
-        path: '/',
-        element: <Landing />
+        path: '/home',
+        element: <Home />
       },
-      {}
+      {
+        path: '/admin',
+        element: <AdminRoute />,
+        children: [
+          {
+            path: '/admin',
+            element: <Admin />
+          },
+          {}
+        ]
+      },
+      {
+        path: '/user',
+        element: <UserRoute />,
+        children: [
+          {
+            path: '/user',
+            element: <User />
+          },
+          {}
+        ]
+      }
     ]
   },
   {
