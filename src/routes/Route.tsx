@@ -1,4 +1,4 @@
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { createBrowserRouter, Navigate, RouterProvider } from 'react-router-dom';
 import Landing from '../pages/Landing';
 import NotFound from '../pages/NotFound';
 import PublicRoute from './visibility/PublicRoute';
@@ -39,16 +39,23 @@ const createRouter = createBrowserRouter([
         element: <AdminRoute />,
         children: [
           {
+            path: '/',
+            element: <Navigate to="/admin" />
+          },
+          {
             path: '/admin',
             element: <Admin />
-          },
-          {}
+          }
         ]
       },
       {
         path: '/',
         element: <UserRoute />,
         children: [
+          {
+            path: '/',
+            element: <Navigate to="/user" />
+          },
           {
             path: '/user',
             element: <User />

@@ -2,9 +2,11 @@ import { FormEvent, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { signupFormType } from '../data/dto/form';
 import { axiosClient } from '../lib/axios-client';
+import { useUserContext } from '../context/userContext';
 
 const Signup = () => {
   const navigate = useNavigate();
+  const { setTokenToLocal, setUser } = useUserContext();
   const [form, setForm] = useState<signupFormType>({
     email: '',
     username: '',
@@ -15,7 +17,11 @@ const Signup = () => {
   const signupHandler = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      await axiosClient.post('/signup', { form });
+      const data = await axiosClient.post('/signup', { form });
+
+      setTokenToLocal('');
+      setUser({ name: '', role: '' });
+
       navigate('/admin');
     } catch (error) {
       console.log(error);

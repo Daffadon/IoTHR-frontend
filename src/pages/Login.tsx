@@ -2,8 +2,10 @@ import { FormEvent, useState } from 'react';
 import { axiosClient } from '../lib/axios-client';
 import { loginFormType } from '../data/dto/form';
 import { Link, useNavigate } from 'react-router-dom';
+import { useUserContext } from '../context/userContext';
 
 const Login = () => {
+  const { setTokenToLocal, setUser } = useUserContext();
   const navigate = useNavigate();
   const [form, setForm] = useState<loginFormType>({
     username: '',
@@ -13,7 +15,11 @@ const Login = () => {
   const loginHandler = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      await axiosClient.post('/login', { form });
+      const data = await axiosClient.post('/login', { form });
+
+      setTokenToLocal('');
+      setUser({ name: '', role: '' });
+
       navigate('/admin');
     } catch (error) {
       console.log(error);
