@@ -1,5 +1,9 @@
 const Home = () => {
-  return <div>Home</div>;
+  return (
+    <div className="grid place-items-center h-screen">
+      <p>Home Page</p>
+    </div>
+  );
 };
 
 export default Home;

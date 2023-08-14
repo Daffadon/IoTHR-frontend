@@ -9,6 +9,7 @@ import AdminRoute from './role/AdminRoute';
 import UserRoute from './role/UserRoute';
 import Admin from '../pages/Admin';
 import User from '../pages/User';
+import Signup from '../pages/Signup';
 
 const createRouter = createBrowserRouter([
   {
@@ -22,6 +23,10 @@ const createRouter = createBrowserRouter([
       {
         path: '/login',
         element: <Login />
+      },
+      {
+        path: '/signup',
+        element: <Signup />
       }
     ]
   },
@@ -30,11 +35,7 @@ const createRouter = createBrowserRouter([
     element: <PrivateRoute />,
     children: [
       {
-        path: '/home',
-        element: <Home />
-      },
-      {
-        path: '/admin',
+        path: '/',
         element: <AdminRoute />,
         children: [
           {
@@ -45,14 +46,17 @@ const createRouter = createBrowserRouter([
         ]
       },
       {
-        path: '/user',
+        path: '/',
         element: <UserRoute />,
         children: [
           {
             path: '/user',
             element: <User />
           },
-          {}
+          {
+            path: '/home',
+            element: <Home />
+          }
         ]
       }
     ]
