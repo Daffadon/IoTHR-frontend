@@ -20,7 +20,7 @@ const Signup = () => {
       const data = await axiosClient.post('/signup', { form });
 
       setTokenToLocal('');
-      setUser({ name: '', role: '' });
+      setUser({ name: '', role: '', validated: false });
 
       navigate('/admin');
     } catch (error) {
@@ -30,7 +30,7 @@ const Signup = () => {
   return (
     <div className="grid place-items-center h-screen">
       <form
-        className="flex flex-col justify-center items-center text-white min-h-[50vh] w-1/5 bg-blue-500 rounded py-5"
+        className="flex flex-col justify-center items-center text-white min-h-[50vh] w-[20em] bg-blue-500 rounded py-5"
         onSubmit={signupHandler}>
         <h1 className="mb-5 text-black font-extrabold">Signup</h1>
         <label htmlFor="email">Email</label>

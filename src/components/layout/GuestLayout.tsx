@@ -1,6 +1,11 @@
-import { ReactNode } from 'react';
+import React, { ReactNode } from 'react';
 import Navbar from '../appbar/Navbar';
-const GuestLayout = (children: ReactNode) => {
+
+interface GuestLayoutProp {
+  children: ReactNode;
+}
+
+const GuestLayout: React.FC<GuestLayoutProp> = ({ children }) => {
   return (
     <>
       <Navbar />

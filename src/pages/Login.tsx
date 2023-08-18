@@ -18,7 +18,7 @@ const Login = () => {
       const data = await axiosClient.post('/login', { form });
 
       setTokenToLocal('');
-      setUser({ name: '', role: '' });
+      setUser({ name: '', role: '', validated: false });
 
       navigate('/admin');
     } catch (error) {
@@ -28,7 +28,7 @@ const Login = () => {
   return (
     <div className="grid place-items-center h-screen">
       <form
-        className="flex flex-col justify-center items-center text-white min-h-[50vh] py-5 w-1/5 bg-blue-500 rounded"
+        className="flex flex-col justify-center items-center text-white min-h-[50vh] py-5 w-[20em] bg-blue-500 rounded"
         onSubmit={loginHandler}>
         <h1 className="mb-5 text-black font-extrabold">Login</h1>
         <label htmlFor="username">Username</label>
