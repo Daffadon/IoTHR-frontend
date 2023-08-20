@@ -2,6 +2,9 @@ import GuestLayout from '../components/layout/GuestLayout';
 import hr from '../assets/ilustration/hrilustration.svg';
 import tech from '../assets/ilustration/tech_ilustration.png';
 import elipse from '../assets/ilustration/elipse.png';
+import { steps } from '../data/page/landing/characteristic';
+import Card from '../components/card/Card';
+import { Link } from 'react-router-dom';
 const Landing = () => {
   return (
     <GuestLayout>
@@ -28,11 +31,28 @@ const Landing = () => {
           better heart care. With our product, safeguarding your cardiovascular well-being has never
           been this effortless or effective.
         </p>
-        <img src={elipse} alt="" className="absolute bottom-10 left-24 w-32 h-40" />
-        <img src={elipse} alt="" className="absolute bottom-40 right-24 w-32 h-40 rotate-180" />
+        <img src={elipse} alt="elipse" className="absolute bottom-10 left-24 w-32 h-40" />
+        <img
+          src={elipse}
+          alt="elipse"
+          className="absolute bottom-40 right-24 w-32 h-40 rotate-180"
+        />
       </div>
-      <div></div>
-      {/* step by step */}
+      <div className=" flex flex-col justify-center items-center min-h-[80vh]">
+        <h1 className="text-3xl font-bold mb-10">STEP BY STEP</h1>
+        <div className="flex justify-center items-center w-8/12 gap-5">
+          {steps.map((step) => {
+            return <Card title={step.name} content={step.content} imgsrc={step.img} />;
+          })}
+        </div>
+      </div>
+      <div className="flex justify-around items-center pb-10">
+        <h1 className="px-8 py-2 text-xl font-semibold">Let's Join with Us</h1>
+        <Link to={'/login'} className="bg-blue-900 text-white px-8 py-2 rounded text-xl font-bold">
+          Get Started
+        </Link>
+        {/* <p className="bg-blue-900 text-white px-8 py-2 rounded text-xl font-bold">Get Started</p> */}
+      </div>
     </GuestLayout>
   );
 };

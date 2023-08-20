@@ -14,9 +14,9 @@ const Navbar = () => {
         <Link to="/home" className=" w-max hover:text-blue-600 duration-200">
           Home
         </Link>
-        <Link to="/#about" className=" w-max hover:text-blue-600 duration-200">
+        {/* <Link to="/#about" className=" w-max hover:text-blue-600 duration-200">
           About
-        </Link>
+        </Link> */}
         {!user?.name ? (
           <>
             <Link to="/signup" className=" w-max hover:text-blue-600 duration-200">
