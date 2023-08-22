@@ -7,7 +7,7 @@ export default {
   theme: {
     extend: {
       backgroundImage: {
-        'landing': "url('src/assets/background/section1_landing.png')",
+        'landing': "url('src/assets/background/section1_landing.svg')",
       }
     },
   },

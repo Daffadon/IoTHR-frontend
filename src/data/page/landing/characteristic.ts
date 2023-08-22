@@ -9,7 +9,7 @@ export const steps = [
     content: 'Use the sensor on your body or on your upper arm'
   },
   {
-    name: 'Timer',
+    name: 'Time',
     img: timer,
     content: 'Wait for a few minutes while sensor detect your hearbeat'
   },
