@@ -11,7 +11,7 @@ const GuestLayout: React.FC<GuestLayoutProp> = ({ children }) => {
     <>
       <Navbar />
       {children}
-      {/* <Footer /> */}
+      <Footer />
     </>
   );
 };
