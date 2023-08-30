@@ -14,12 +14,12 @@ import Signup from '../pages/Signup';
 const createRouter = createBrowserRouter([
   {
     path: '/',
-    element: <Landing />
-  },
-  {
-    path: '/',
     element: <PublicRoute />,
     children: [
+      {
+        path: '/',
+        element: <Landing />
+      },
       {
         path: '/login',
         element: <Login />

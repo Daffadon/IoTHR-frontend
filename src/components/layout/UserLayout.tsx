@@ -1,9 +1,13 @@
 import { ReactNode, useEffect } from 'react';
 import { useUserContext } from '../../context/userContext';
 import { axiosClient } from '../../lib/axios-client';
-import Navbar from '../appbar/Navbar';
+import Sidebar from '../appbar/Sidebar';
 
-const UserLayout = (children: ReactNode) => {
+interface UserLayoutType {
+  children: ReactNode;
+}
+
+const UserLayout: React.FC<UserLayoutType> = ({ children }) => {
   const { setUser } = useUserContext();
   useEffect(() => {
     const getUserData = async () => {
@@ -13,10 +17,10 @@ const UserLayout = (children: ReactNode) => {
     getUserData();
   }, []);
   return (
-    <>
-      <Navbar />
-      {children}
-    </>
+    <div className="flex w-full min-h-screen">
+      <Sidebar />
+      <div className="w-5/6 min-h-[150vh]">{children}</div>
+    </div>
   );
 };
 

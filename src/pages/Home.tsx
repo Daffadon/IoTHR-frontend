@@ -1,8 +1,10 @@
+import UserLayout from '../components/layout/UserLayout';
+
 const Home = () => {
   return (
-    <div className="grid place-items-center h-screen">
-      <p>Home Page</p>
-    </div>
+    <UserLayout>
+      <div className="px-5 py-3">asdasdad</div>
+    </UserLayout>
   );
 };
 
