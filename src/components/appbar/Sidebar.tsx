@@ -1,23 +1,55 @@
+import { NavLink } from 'react-router-dom';
 import icnlogo from '../../assets/icn-logo.svg';
 import { TbActivityHeartbeat } from 'react-icons/tb';
 const Sidebar = () => {
+  //bg-gradient-to-r from-indigo-500 from-10% via-sky-500 via-30% to-emerald-500 to-90%
+  // border-r-indigo-700
   return (
-    <div className="w-1/6 max-h-screen sticky top-0 border-r-indigo-700 text-white border-right font-semibold bg-black bg-no-repeat">
+    <div className="w-1/6 max-h-screen sticky top-0 text-white border-right font-semibold backdrop-blur-xl bg-gradient-to-r from-[#1565c0] from-30% via-[#0E2FA6] via-60% bg-[#01579b] to-100%">
       <img
         src={icnlogo}
         alt="logo"
         className="absolute top-[50%] left-[50%] w-[80%] translate-x-[-50%] translate-y-[-50%] -z-10"
       />
-      <div className="bg-blue-500 w-full max-h-screen h-screen bg-opacity-50">
-        <div className="h-[3em] mb-[1em] bg-blue-300 flex justify-center items-center text-blue-800">
+      <div className=" w-full max-h-screen h-screen bg-opacity-50">
+        <div className="h-[3em] mb-[1em] flex justify-center items-center text-black bg-gradient-to-r from-blue-500 from-30% via-[#03A9F4] via-60% bg-[#0277BD] to-100%">
           <TbActivityHeartbeat size={50} />
         </div>
-        <p className="px-3 py-2 border-b border-blue-800">Profile</p>
-        <p className="px-3 py-2 border-b border-blue-800">Raw Data</p>
-        <p className="px-3 py-2 border-b border-blue-800">Analysis</p>
-        <p className="px-3 py-2 border-b border-blue-800">FAQ</p>
-        <div className="flex justify-center items-end h-[60%]">
-          <p className="bg-blue-300 w-full text-blue-800 text-center py-2 font-extrabold">Logout</p>
+        <div className="block border-b-2 border-blue-700 px-2 py-3">
+          <NavLink to={'/profile'} className="hover:text-blue-300 duration-150">
+            Profile
+          </NavLink>
+        </div>
+
+        <div className="block border-b-2 border-blue-700 px-2 py-3">
+          <NavLink to={'/'} className="hover:text-blue-400 duration-150">
+            Raw Data
+          </NavLink>
+        </div>
+
+        <div className="block border-b-2 border-blue-700 px-2 py-3">
+          <NavLink to={'/'} className="hover:text-blue-400 duration-150">
+            Analysis
+          </NavLink>
+        </div>
+
+        <div className="block border-b-2 border-blue-700 px-2 py-3">
+          <NavLink to={'/'} className="hover:text-blue-400 duration-150">
+            Faq
+          </NavLink>
+        </div>
+
+        <div className="block border-b-2 border-blue-700 px-2 py-3">
+          <NavLink to={'/'} className="hover:text-blue-400 duration-150">
+            Contact
+          </NavLink>
+        </div>
+
+        <div className="flex justify-center items-end h-1/2">
+          <div></div>
+          <button className="bg-gradient-to-r from-blue-500 from-30% via-[#03A9F4] via-60% bg-[#0277BD] to-100% w-[60%] text-black text-center py-2 font-extrabold rounded-lg hover:bg-[#40c4ff] hover:text-white duration-200">
+            Logout
+          </button>
         </div>
       </div>
     </div>

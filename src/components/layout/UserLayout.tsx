@@ -19,7 +19,7 @@ const UserLayout: React.FC<UserLayoutType> = ({ children }) => {
   return (
     <div className="flex w-full min-h-screen">
       <Sidebar />
-      <div className="w-5/6 min-h-[150vh]">{children}</div>
+      <div className="w-5/6 min-h-[100vh]">{children}</div>
     </div>
   );
 };

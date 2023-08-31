@@ -10,6 +10,7 @@ import UserRoute from './role/UserRoute';
 import Admin from '../pages/Admin';
 import User from '../pages/User';
 import Signup from '../pages/Signup';
+import Profile from '../pages/Profile';
 
 const createRouter = createBrowserRouter([
   {
@@ -63,6 +64,10 @@ const createRouter = createBrowserRouter([
           {
             path: '/home',
             element: <Home />
+          },
+          {
+            path: '/profile',
+            element: <Profile />
           }
         ]
       }
