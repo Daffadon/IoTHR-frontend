@@ -1,5 +1,5 @@
 import { FormEvent, useState } from 'react';
-import { axiosClient } from '../lib/axios-client';
+// import { axiosClient } from '../lib/axios-client';
 import { loginFormType } from '../data/dto/form';
 import { Link, useNavigate } from 'react-router-dom';
 import { useUserContext } from '../context/userContext';
@@ -9,7 +9,7 @@ import { BsArrowRight } from 'react-icons/bs';
 const Login = () => {
   const { setTokenToLocal, setUser } = useUserContext();
   const navigate = useNavigate();
-  const [msg, setMsg] = useState<[] | null>(null);
+  // const [msg, setMsg] = useState<[] | null>(null);
   const [form, setForm] = useState<loginFormType>({
     username: '',
     password: ''
@@ -18,7 +18,7 @@ const Login = () => {
   const loginHandler = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      const data = await axiosClient.post('/login', { form });
+      // const data = await axiosClient.post('/login', { form });
 
       setTokenToLocal('');
       setUser({ name: '', role: '', validated: false });
@@ -35,10 +35,10 @@ const Login = () => {
           className="flex flex-col justify-center items-center text-white min-h-[60vh] py-5 w-[20em] bg-blue-700 rounded-xl"
           onSubmit={loginHandler}>
           <h1 className="mb-5 text-white font-bold text-2xl">Login</h1>
-          {msg &&
+          {/* {msg &&
             msg.map((msg) => {
               return <p>{msg}</p>;
-            })}
+            })} */}
           <label htmlFor="username" className="text-lg">
             Username
           </label>

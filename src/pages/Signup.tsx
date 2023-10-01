@@ -1,7 +1,7 @@
 import { FormEvent, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { signupFormType } from '../data/dto/form';
-import { axiosClient } from '../lib/axios-client';
+// import { axiosClient } from '../lib/axios-client';
 import { useUserContext } from '../context/userContext';
 import GuestLayout from '../components/layout/GuestLayout';
 import { BsArrowLeft } from 'react-icons/bs';
@@ -24,7 +24,7 @@ const Signup = () => {
         setMsg(['Your Password and Repeat Password Not Match']);
         return;
       }
-      const data = await axiosClient.post('/signup', { form });
+      // const data = await axiosClient.post('/signup', { form });
       setTokenToLocal('');
       setUser({ name: '', role: '', validated: false });
 

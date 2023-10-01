@@ -1,5 +1,6 @@
-import { Navigate, Outlet } from 'react-router-dom';
-import { useUserContext } from '../../context/userContext';
+// import { Navigate, Outlet } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
+// import { useUserContext } from '../../context/userContext';
 
 const PrivateRoute = () => {
   // const { token } = useUserContext();
