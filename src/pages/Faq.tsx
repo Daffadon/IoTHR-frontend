@@ -1,5 +1,9 @@
+import UserLayout from '../components/layout/UserLayout';
+
 const Faq = () => {
-  return <div>Faq</div>;
+  return <UserLayout>
+    <h1>FAQ Dropdown</h1>
+  </UserLayout>;
 };
 
 export default Faq;

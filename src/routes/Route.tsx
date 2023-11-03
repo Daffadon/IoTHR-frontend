@@ -11,7 +11,9 @@ import Admin from '../pages/Admin';
 import User from '../pages/User';
 import Signup from '../pages/Signup';
 import Profile from '../pages/Profile';
-import Analysis from '../pages/Analysis';
+import Analysis from '../pages/History';
+import Faq from '../pages/Faq';
+import Contact from '../pages/Contact';
 
 const createRouter = createBrowserRouter([
   {
@@ -71,8 +73,16 @@ const createRouter = createBrowserRouter([
             element: <Profile />
           },
           {
-            path: '/analysis',
+            path: '/history',
             element: <Analysis />
+          },
+          {
+            path: '/faq',
+            element: <Faq />
+          },
+          {
+            path: '/contact',
+            element: <Contact />
           }
         ]
       }

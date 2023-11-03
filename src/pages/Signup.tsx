@@ -4,7 +4,7 @@ import { signupFormType } from '../data/dto/form';
 // import { axiosClient } from '../lib/axios-client';
 import { useUserContext } from '../context/userContext';
 import GuestLayout from '../components/layout/GuestLayout';
-import { BsArrowLeft } from 'react-icons/bs';
+import { BsArrowLeft, BsArrowRight } from 'react-icons/bs';
 
 const Signup = () => {
   const navigate = useNavigate();
@@ -28,7 +28,7 @@ const Signup = () => {
       setTokenToLocal('');
       setUser({ name: '', role: '', validated: false });
 
-      navigate('/admin');
+      navigate('/home');
     } catch (error) {
       console.log(error);
     }
@@ -37,7 +37,7 @@ const Signup = () => {
     <GuestLayout>
       <div className="grid place-items-center min-h-[90vh]">
         <form
-          className="flex flex-col justify-center items-center text-white min-h-[60vh] w-[20em] bg-blue-700 rounded-xl py-10 px-16"
+          className="flex flex-col justify-center items-center text-white min-h-[60vh] w-[22em] bg-blue-700 rounded-xl py-10 px-16"
           onSubmit={signupHandler}>
           <h1 className="mb-5 font-bold text-xl text-white">Signup</h1>
           {msg &&
@@ -99,14 +99,16 @@ const Signup = () => {
             }}
             className=" rounded text-black mt-2 px-2 py-1 focus:outline-none"
           />
-          <button type="submit" className="bg-black mt-5 px-9 py-1 rounded">
+          <button
+            type="submit"
+            className="bg-black mt-5 px-9 py-1 rounded hover:bg-white hover:text-black duration-300">
             Signup
           </button>
           <Link to={'/login'} className="text-lg flex justify-center items-center mt-5 gap-2">
-            <div className="mt-1">
-              <BsArrowLeft size={25} />
-            </div>
             <p>Login</p>
+            <div className="mt-1">
+              <BsArrowRight size={25} />
+            </div>
           </Link>
         </form>
       </div>

@@ -4,7 +4,7 @@ import { loginFormType } from '../data/dto/form';
 import { Link, useNavigate } from 'react-router-dom';
 import { useUserContext } from '../context/userContext';
 import GuestLayout from '../components/layout/GuestLayout';
-import { BsArrowRight } from 'react-icons/bs';
+import { BsArrowLeft, BsArrowRight } from 'react-icons/bs';
 
 const Login = () => {
   const { setTokenToLocal, setUser } = useUserContext();
@@ -32,7 +32,7 @@ const Login = () => {
     <GuestLayout>
       <div className="grid place-items-center min-h-[90vh]">
         <form
-          className="flex flex-col justify-center items-center text-white min-h-[60vh] py-5 w-[20em] bg-blue-700 rounded-xl"
+          className="flex flex-col justify-center items-center text-white min-h-[60vh] py-5 w-[22em] bg-blue-700 rounded-xl"
           onSubmit={loginHandler}>
           <h1 className="mb-5 text-white font-bold text-2xl">Login</h1>
           {/* {msg &&
@@ -68,14 +68,16 @@ const Login = () => {
             }}
             className=" rounded text-black mt-2 focus:outline-none px-2 py-1"
           />
-          <button type="submit" className="bg-black mt-5 px-9 py-1 rounded">
+          <button
+            type="submit"
+            className="bg-black mt-5 px-9 py-1 rounded hover:bg-white hover:text-black duration-300">
             Login
           </button>
           <Link to={'/signup'} className="text-lg flex justify-center items-center mt-5 gap-2">
-            <p>Signup</p>
             <div className="mt-1">
-              <BsArrowRight size={25} />
+              <BsArrowLeft size={25} />
             </div>
+            <p>Signup</p>
           </Link>
         </form>
       </div>

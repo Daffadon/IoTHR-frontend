@@ -21,14 +21,8 @@ const Sidebar = () => {
         </div>
 
         <div className="block border-b-2 border-blue-700 px-2 py-3">
-          <NavLink to={'/raw'} className="hover:text-blue-400 duration-150">
-            Raw Data
-          </NavLink>
-        </div>
-
-        <div className="block border-b-2 border-blue-700 px-2 py-3">
-          <NavLink to={'/analysis'} className="hover:text-blue-400 duration-150">
-            Analysis
+          <NavLink to={'/history'} className="hover:text-blue-400 duration-150">
+            History
           </NavLink>
         </div>
 

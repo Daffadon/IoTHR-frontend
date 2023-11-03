@@ -1,12 +1,11 @@
 import UserLayout from '../components/layout/UserLayout';
 import { useUserContext } from '../context/userContext';
-// import Feature from '../assets/ilustration/feature.svg';
 import { CgProfile } from 'react-icons/cg';
 import { BsFillClipboardDataFill } from 'react-icons/bs';
 import { VscGraphLine } from 'react-icons/vsc';
 import { FaQuestionCircle } from 'react-icons/fa';
 import { IoIosContact } from 'react-icons/io';
-
+import elipse from '../assets/ilustration/elipse.png';
 const Home = () => {
   const { user } = useUserContext();
   return (
@@ -44,6 +43,8 @@ const Home = () => {
           </div>
         </div>
       </div>
+      <img src={elipse} alt="elipse" className="absolute top-16 left-16 w-16 rotate-45" />
+      <img src={elipse} alt="elipse" className="absolute bottom-16 right-16 w-16 -rotate-90" />
     </UserLayout>
   );
 };
