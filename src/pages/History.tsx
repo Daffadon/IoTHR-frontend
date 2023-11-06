@@ -60,7 +60,7 @@ const History = () => {
         ecgplot: number[];
         annotation: number[][][];
       };
-      comment: string;
+      comment: string[];
       label: string;
     }>
   ) => {
