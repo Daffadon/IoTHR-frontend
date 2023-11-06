@@ -4,7 +4,7 @@ import { loginFormType } from '../data/dto/form';
 import { Link, useNavigate } from 'react-router-dom';
 import { useUserContext } from '../context/userContext';
 import GuestLayout from '../components/layout/GuestLayout';
-import { BsArrowLeft, BsArrowRight } from 'react-icons/bs';
+import { BsArrowLeft } from 'react-icons/bs';
 
 const Login = () => {
   const { setTokenToLocal, setUser } = useUserContext();

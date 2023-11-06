@@ -1,6 +1,6 @@
 import { ReactNode, useEffect } from 'react';
-import { useUserContext } from '../../context/userContext';
-import { axiosClient } from '../../lib/axios-client';
+// import { useUserContext } from '../../context/userContext';
+// import { axiosClient } from '../../lib/axios-client';
 import Sidebar from '../appbar/Sidebar';
 
 interface UserLayoutType {
@@ -8,7 +8,7 @@ interface UserLayoutType {
 }
 
 const UserLayout: React.FC<UserLayoutType> = ({ children }) => {
-  const { setUser } = useUserContext();
+  // const { setUser } = useUserContext();
   useEffect(() => {
     const getUserData = async () => {
       // const { data } = await axiosClient.get('/user');

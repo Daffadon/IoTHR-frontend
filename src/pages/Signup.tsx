@@ -4,7 +4,7 @@ import { signupFormType } from '../data/dto/form';
 // import { axiosClient } from '../lib/axios-client';
 import { useUserContext } from '../context/userContext';
 import GuestLayout from '../components/layout/GuestLayout';
-import { BsArrowLeft, BsArrowRight } from 'react-icons/bs';
+import { BsArrowRight } from 'react-icons/bs';
 
 const Signup = () => {
   const navigate = useNavigate();

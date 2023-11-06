@@ -6,7 +6,20 @@ export const toHRPayload = (data: {
     feature: string;
     runtime: number;
     ecgplot: number[];
-    annotation: number[][][];
+    annotation: {
+      N: never[] | number[][];
+      S: never[] | number[][];
+      V: never[] | number[][];
+      F: never[] | number[][];
+      Q: never[] | number[][];
+    };
+    sample_plot: {
+      N: number[] | number[][];
+      S: number[] | number[][];
+      V: number[] | number[][];
+      F: number[] | number[][];
+      Q: number[] | number[][];
+    };
   };
   label: string;
 }) => {
@@ -20,7 +33,7 @@ export const toHRPayload = (data: {
   return payload;
 };
 
-export const toECGPayload = (data: number[]) => {
+export const toECGPayload = (data: number[] | number[][]) => {
   let payload = [];
   for (let i = 0; i < data.length; i++) {
     const obj = {

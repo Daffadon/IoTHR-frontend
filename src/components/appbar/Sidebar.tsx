@@ -2,7 +2,7 @@ import { NavLink } from 'react-router-dom';
 import icnlogo from '../../assets/icn-logo.svg';
 import { TbActivityHeartbeat } from 'react-icons/tb';
 const Sidebar = () => {
-  const logout = () => {};
+  // const logout = () => {};
   return (
     <div className="w-1/6 max-h-screen sticky top-0 text-white border-right font-semibold backdrop-blur-xl bg-gradient-to-r from-[#1565c0] from-30% via-[#0E2FA6] via-60% bg-[#01579b] to-100%">
       <img
@@ -21,8 +21,8 @@ const Sidebar = () => {
         </div>
 
         <div className="block border-b-2 border-blue-700 px-2 py-3">
-          <NavLink to={'/history'} className="hover:text-blue-400 duration-150">
-            History
+          <NavLink to={'/record'} className="hover:text-blue-400 duration-150">
+            Record Heartbeat
           </NavLink>
         </div>
 

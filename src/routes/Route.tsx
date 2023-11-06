@@ -11,7 +11,7 @@ import Admin from '../pages/Admin';
 import User from '../pages/User';
 import Signup from '../pages/Signup';
 import Profile from '../pages/Profile';
-import Analysis from '../pages/History';
+import Record from '../pages/Record';
 import Faq from '../pages/Faq';
 import Contact from '../pages/Contact';
 
@@ -73,8 +73,8 @@ const createRouter = createBrowserRouter([
             element: <Profile />
           },
           {
-            path: '/history',
-            element: <Analysis />
+            path: '/record',
+            element: <Record />
           },
           {
             path: '/faq',

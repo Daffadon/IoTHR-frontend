@@ -1,10 +1,11 @@
 import { Link } from 'react-router-dom';
+import logo from '../../assets/icn-logo.svg';
 const Navbar = () => {
   return (
     <nav className="flex justify-around items-center h-[10vh] bg-[#1E1E1E] sticky top-0 z-50">
       <div className="w-1/2 grid place-items-center">
         <Link to={'/'}>
-          <img src="src/assets/icn-logo.svg" alt="" className="w-4/6" />
+          <img src={logo} alt="" className="w-4/6" />
         </Link>
       </div>
       <div className="w-1/2 flex items-center justify-center gap-7 text-white">
