@@ -42,9 +42,10 @@ export const toPredictionValue = (data: PredictionData) => {
   const payload = [];
 
   for (const key in data) {
+    const propertyName = key as keyof PredictionData;
     payload.push({
-      name: key,
-      value: data[key]
+      name: propertyName,
+      value: data[propertyName]
     });
   }
   return payload;

@@ -1,7 +1,6 @@
 import UserLayout from '../components/layout/UserLayout';
 import { useUserContext } from '../context/userContext';
 import { CgProfile } from 'react-icons/cg';
-import { BsFillClipboardDataFill } from 'react-icons/bs';
 import { VscGraphLine } from 'react-icons/vsc';
 import { FaQuestionCircle } from 'react-icons/fa';
 import { IoIosContact } from 'react-icons/io';

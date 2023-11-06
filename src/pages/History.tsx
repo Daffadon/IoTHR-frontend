@@ -35,6 +35,7 @@ const History = () => {
       ecgplot: number[];
       annotation: number[][][];
     };
+    comment: string[];
     label: string;
   }>(optionsSelection[0]);
 
@@ -59,6 +60,7 @@ const History = () => {
         ecgplot: number[];
         annotation: number[][][];
       };
+      comment: string;
       label: string;
     }>
   ) => {
@@ -222,16 +224,9 @@ const History = () => {
       </div>
       <section className="ml-5 mr-5 pb-10">
         <h1 className="border-b-2 max-w-fit border-b-black mb-3">Comments From Doctor</h1>
-        <p>
-          "Dear Daffa, I am pleased to inform you that your recent ECG results indicate no signs of
-          arrhythmia. Your heart rhythm appears to be normal. Please continue with your regular
-          health routine."
-        </p>
-        <p>
-          "Dear Daffa, your recent tests have come back negative for arrhythmia. Your heart is
-          functioning as it should, and there are no irregularities to be concerned about. Stay
-          well."
-        </p>
+        {selected.comment.map((com, index) => (
+          <p key={index}>{com}</p>
+        ))}
       </section>
     </UserLayout>
   );
