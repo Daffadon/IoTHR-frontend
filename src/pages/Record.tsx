@@ -20,64 +20,12 @@ import { useState } from 'react';
 // Nanti pake context biar ga fetching terus buat batch
 
 const Record = () => {
-  const [selected, setSelected] = useState<{
-    value: {
-      name: string;
-      date: string;
-      prediction: { N: number; S: number; V: number; F: number; Q: number };
-      feature: string;
-      runtime: number;
-      ecgplot: number[];
-      annotation: {
-        N: never[] | number[][];
-        S: never[] | number[][];
-        V: never[] | number[][];
-        F: never[] | number[][];
-        Q: never[] | number[][];
-      };
-      sample_plot: {
-        N: number[] | number[][];
-        S: number[] | number[][];
-        V: number[] | number[][];
-        F: number[] | number[][];
-        Q: number[] | number[][];
-      };
-    };
-    comment: string[];
-    label: string;
-  }>(optionsSelection[0]);
+  const [selected, setSelected] = useState<JsonDatatype>(optionsSelection[0]);
 
   const dataEcg = toHRPayload(selected);
   const classification = toPredictionValue(selected.value.prediction);
 
-  const handleSelectChange = (
-    selectedOption: SingleValue<{
-      value: {
-        name: string;
-        date: string;
-        prediction: { N: number; S: number; V: number; F: number; Q: number };
-        feature: string;
-        runtime: number;
-        ecgplot: number[];
-        annotation: {
-          N: never[] | number[][];
-          S: never[] | number[][];
-          V: never[] | number[][];
-          F: never[] | number[][];
-          Q: never[] | number[][];
-        };
-        sample_plot: {
-          N: number[] | number[][];
-          S: number[] | number[][];
-          V: number[] | number[][];
-          F: number[] | number[][];
-          Q: number[] | number[][];
-        };
-      };
-      comment: string[];
-      label: string;
-    }>
-  ) => {
+  const handleSelectChange = (selectedOption: SingleValue<JsonDatatype>) => {
     setSelected(selectedOption!);
   };
 
