@@ -2,6 +2,7 @@ export const toHRPayload = (data: JsonDatatype) => {
   let payload = [];
   for (let i = 0; i < data?.value?.ecgplot.length; i++) {
     const obj = {
+      index: i,
       pulse: data.value.ecgplot[i]
     };
     payload.push(obj);

@@ -7,9 +7,12 @@ import GuestLayout from '../components/layout/GuestLayout';
 import { BsArrowLeft } from 'react-icons/bs';
 
 const Login = () => {
-  const { setTokenToLocal, setUser } = useUserContext();
+  // const { setTokenToLocal, setUser } = useUserContext();
+
+  const { setTokenToLocal } = useUserContext();
   const navigate = useNavigate();
   // const [msg, setMsg] = useState<[] | null>(null);
+  const [msg, setMsg] = useState<String | null>(null);
   const [form, setForm] = useState<loginFormType>({
     username: '',
     password: ''
@@ -19,14 +22,17 @@ const Login = () => {
     e.preventDefault();
     try {
       // const data = await axiosClient.post('/login', { form });
-
-      setTokenToLocal('');
-      setUser({ name: '', role: '', validated: false });
-
-      navigate('/admin');
-    } catch (error) {
-      console.log(error);
-    }
+      if (
+        form.username === import.meta.env.VITE_APP_USERNAME &&
+        form.password === import.meta.env.VITE_APP_PASSWD
+      ) {
+        setTokenToLocal(import.meta.env.VITE_APP_TOKEN);
+        // setUser({ name: '', role: '', validated: false });
+        navigate('/home');
+      } else {
+        setMsg("username and password combination doesn't match");
+      }
+    } catch (error) {}
   };
   return (
     <GuestLayout>
@@ -79,6 +85,7 @@ const Login = () => {
             </div>
             <p>Signup</p>
           </Link>
+          {msg ? <p className="text-center text-black font-semibold mt-5">{msg}</p> : ''}
         </form>
       </div>
     </GuestLayout>

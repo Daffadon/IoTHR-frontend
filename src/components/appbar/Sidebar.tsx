@@ -2,7 +2,11 @@ import { NavLink } from 'react-router-dom';
 import icnlogo from '../../assets/icn-logo.svg';
 import { TbActivityHeartbeat } from 'react-icons/tb';
 const Sidebar = () => {
-  // const logout = () => {};
+  const logout = () => {
+    try {
+      localStorage.removeItem('ACCESS_TOKEN');
+    } catch (error) {}
+  };
   return (
     <div className="w-1/6 max-h-screen sticky top-0 text-white border-right font-semibold backdrop-blur-xl bg-gradient-to-r from-[#1565c0] from-30% via-[#0E2FA6] via-60% bg-[#01579b] to-100%">
       <img
@@ -41,7 +45,7 @@ const Sidebar = () => {
         <div className="flex justify-center items-end h-1/2 ">
           <a href="/" className="w-full flex justify-center">
             <button
-              // onClick={logout}
+              onClick={logout}
               className="bg-gradient-to-r from-blue-500 from-30% via-[#03A9F4] via-60% bg-[#0277BD] to-100% w-[60%] text-black text-center py-2 font-extrabold rounded-lg hover:bg-[#40c4ff] hover:text-white duration-200">
               Logout
             </button>

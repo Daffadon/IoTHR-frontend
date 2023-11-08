@@ -1,6 +1,5 @@
 import UserLayout from '../components/layout/UserLayout';
-// import dummyPict from '../assets/ilustration/profile_dummy.jpg';
-import dummypict from '../assets/profpicdummy.jpg';
+import dummypict from '../assets/profpicdummy.png';
 import { optionsSelection } from '../data/page/analysis/options';
 const Profile = () => {
   return (

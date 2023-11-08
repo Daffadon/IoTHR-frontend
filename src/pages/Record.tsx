@@ -9,7 +9,8 @@ import {
   ResponsiveContainer,
   BarChart,
   Bar,
-  Brush
+  Brush,
+  ReferenceDot
 } from 'recharts';
 
 import UserLayout from '../components/layout/UserLayout';
@@ -30,7 +31,7 @@ const Record = () => {
   };
 
   const { N, S, V, F, Q } = selected.value.sample_plot;
-  // const plot_n = toECGPayload(N);
+  const annot = selected.value.annotation;
 
   return (
     <UserLayout>
@@ -46,7 +47,7 @@ const Record = () => {
         />
       </div>
       <div className="flex justify-center items-center flex-col">
-        <ResponsiveContainer width="90%" height="30%" minHeight={'40vh'}>
+        <ResponsiveContainer width="90%" height="30%" minHeight={'45vh'}>
           <LineChart
             data={dataEcg}
             margin={{
@@ -56,19 +57,27 @@ const Record = () => {
               bottom: 5
             }}>
             <CartesianGrid strokeDasharray="1 1" />
-            <XAxis dataKey="name" />
-            <YAxis scale={'auto'} />
+            <XAxis dataKey={'index'} />
+            <YAxis />
             <Tooltip />
             <Legend />
-            <Line
-              type="monotone"
-              dataKey={'pulse'}
-              stroke="#8884d8"
-              name="Heart beat"
-              dot={false}
-            />
-            <Brush startIndex={0} endIndex={1100} dataKey="pulse" stroke="#8884d8" />
-            {/* <Line type="monotone" dataKey={'pulse'} stroke="#8884d8" activeDot={{ r: 8 }} /> */}
+            <Line type="monotone" dataKey={'pulse'} stroke="#8884d8" name="Heartbeat" dot={false} />
+            {annot.V.length > 0 && (
+              <ReferenceDot x={annot.V[0][0]} y={annot.V[0][1] + 100} label="v" fill="yellow" />
+            )}
+            {annot.S.length > 0 && (
+              <ReferenceDot x={annot.S[0][0]} y={annot.S[0][1] + 100} label="s" fill="red" />
+            )}
+            {annot.F.length > 0 && (
+              <ReferenceDot x={annot.V[0][0]} y={annot.V[0][1] + 100} label="f" fill="green" />
+            )}
+            {annot.N.length > 0 && (
+              <ReferenceDot x={annot.V[0][0]} y={annot.V[0][1] + 100} label="n" fill="blue" />
+            )}
+            {annot.Q.length > 0 && (
+              <ReferenceDot x={annot.V[0][0]} y={annot.V[0][1] + 100} label="q" fill="grey" />
+            )}
+            <Brush startIndex={0} endIndex={950} dataKey="index" stroke="#8884d8" />
           </LineChart>
         </ResponsiveContainer>
 
