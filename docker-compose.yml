@@ -1,18 +1,18 @@
-# version: '3'
-# services:
-#   fe:
-#     image: daffaputranarendra/fe-polarh10:latest
-#     container_name: fe_container
-#     ports:
-#       - '3000:80'
-
 version: '3'
 services:
   fe:
-    # image:
-    build:
-      context: .
-      dockerfile: Dockerfile
+    image: daffaputranarendra/fe-polar-h10:latest
     container_name: fe_container
     ports:
       - '3000:80'
+
+# version: '3'
+# services:
+#   fe:
+#     # image:
+#     build:
+#       context: .
+#       dockerfile: Dockerfile
+#     container_name: fe_container
+#     ports:
+#       - '3000:80'
