@@ -87,7 +87,7 @@ const Signup = () => {
             className=" rounded text-black mt-2 px-2 py-1 focus:outline-none"
           />
           <label htmlFor="repassword" className="mt-5 text-lg">
-            Repeat Password
+            Confirm Password
           </label>
           <input
             type="password"
