@@ -11,9 +11,10 @@ import Admin from '../pages/Admin';
 import User from '../pages/User';
 import Signup from '../pages/Signup';
 import Profile from '../pages/Profile';
-import Record from '../pages/Record';
 import Faq from '../pages/Faq';
 import Contact from '../pages/Contact';
+import History from '../pages/History';
+import Record from '../pages/Record';
 
 const createRouter = createBrowserRouter([
   {
@@ -75,6 +76,10 @@ const createRouter = createBrowserRouter([
           {
             path: '/record',
             element: <Record />
+          },
+          {
+            path: '/history',
+            element: <History />
           },
           {
             path: '/faq',

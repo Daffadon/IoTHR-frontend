@@ -5,7 +5,7 @@ const Sidebar = () => {
   const logout = () => {
     try {
       localStorage.removeItem('ACCESS_TOKEN');
-    } catch (error) {}
+    } catch (error) { }
   };
   return (
     <div className="w-1/6 max-h-screen sticky top-0 text-white border-right font-semibold backdrop-blur-xl bg-gradient-to-r from-[#1565c0] from-30% via-[#0E2FA6] via-60% bg-[#01579b] to-100%">
@@ -26,9 +26,16 @@ const Sidebar = () => {
 
         <div className="block border-b-2 border-blue-700 px-2 py-3">
           <NavLink to={'/record'} className="hover:text-blue-400 duration-150">
-            Record Heartbeat
+            Record
           </NavLink>
         </div>
+
+        <div className="block border-b-2 border-blue-700 px-2 py-3">
+          <NavLink to={'/history'} className="hover:text-blue-400 duration-150">
+            History
+          </NavLink>
+        </div>
+
 
         <div className="block border-b-2 border-blue-700 px-2 py-3">
           <NavLink to={'/faq'} className="hover:text-blue-400 duration-150">
