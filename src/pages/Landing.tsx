@@ -46,8 +46,8 @@ const Landing = () => {
       <div className=" flex flex-col justify-center items-center min-h-[50vh]">
         <h1 className="text-3xl font-bold mb-10">STEP BY STEP</h1>
         <div className="flex justify-center items-center w-8/12 gap-5">
-          {steps.map((step) => {
-            return <Card title={step.name} content={step.content} imgsrc={step.img} />;
+          {steps.map((step, i) => {
+            return <Card key={i} title={step.name} content={step.content} imgsrc={step.img} />;
           })}
         </div>
       </div>
@@ -62,7 +62,6 @@ const Landing = () => {
             className="bg-blue-900 text-white px-10 py-3 rounded-xl text-xl font-bold border-none mt-10 hover:scale-105 hover:bg-black duration-150 ">
             Get Started
           </Link>
-          {/* <p className="bg-blue-900 text-white px-8 py-2 rounded text-xl font-bold">Get Started</p> */}
         </div>
       </div>
     </GuestLayout>
