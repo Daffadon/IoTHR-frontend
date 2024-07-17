@@ -1,38 +1,31 @@
 import { FormEvent, useState } from 'react';
-// import { axiosClient } from '../lib/axios-client';
 import { loginFormType } from '../data/dto/form';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useUserContext } from '../context/userContext';
 import GuestLayout from '../components/layout/GuestLayout';
 import { BsArrowLeft } from 'react-icons/bs';
+import { axiosClient } from '../lib/axios-client';
+import { errorNotification, successNotification } from '../components/toast/notification';
+import { ToastContainer } from 'react-toastify';
 
 const Login = () => {
-  // const { setTokenToLocal, setUser } = useUserContext();
-
   const { setTokenToLocal } = useUserContext();
-  const navigate = useNavigate();
-  // const [msg, setMsg] = useState<[] | null>(null);
-  const [msg, setMsg] = useState<String | null>(null);
   const [form, setForm] = useState<loginFormType>({
-    username: '',
+    email: '',
     password: ''
   });
 
   const loginHandler = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      // const data = await axiosClient.post('/login', { form });
-      if (
-        form.username === import.meta.env.VITE_APP_USERNAME &&
-        form.password === import.meta.env.VITE_APP_PASSWD
-      ) {
-        setTokenToLocal(import.meta.env.VITE_APP_TOKEN);
-        // setUser({ name: '', role: '', validated: false });
-        navigate('/home');
-      } else {
-        setMsg("username and password combination doesn't match");
+      const { data } = await axiosClient.post('/auth/login', form);
+      if (data != null || data != undefined) {
+        successNotification('Login Success');
+        setTokenToLocal(data.jwt);
       }
-    } catch (error) {}
+    } catch (error: any) {
+      errorNotification(error.response.data.error);
+    }
   };
   return (
     <GuestLayout>
@@ -41,23 +34,16 @@ const Login = () => {
           className="flex flex-col justify-center items-center text-white min-h-[60vh] py-5 w-[22em] bg-blue-700 rounded-xl"
           onSubmit={loginHandler}>
           <h1 className="mb-5 text-white font-bold text-2xl">Login</h1>
-          {/* {msg &&
-            msg.map((msg) => {
-              return <p>{msg}</p>;
-            })} */}
           <label htmlFor="username" className="text-lg">
-            Username
+            Email
           </label>
           <input
             type="text"
-            name="username"
-            id="username"
-            value={form.username}
+            name="email"
+            id="email"
+            value={form.email}
             onChange={(e) => {
-              setForm((prev) => ({ ...prev, username: e.target.value }));
-              // setForm((prev) => {
-              //   return { ...prev, username: e.target.value };
-              // });
+              setForm((prev) => ({ ...prev, email: e.target.value }));
             }}
             className="rounded text-black mt-2 focus:outline-none px-2 py-1"
           />
@@ -85,8 +71,8 @@ const Login = () => {
             </div>
             <p>Signup</p>
           </Link>
-          {msg ? <p className="text-center text-black font-semibold mt-5">{msg}</p> : ''}
         </form>
+        <ToastContainer />
       </div>
     </GuestLayout>
   );
