@@ -20,7 +20,6 @@ const History = () => {
   }, [selected]);
 
   const { N, S, V, F, Q } = selected.value.sample_plot;
-  console.log(N)
 
   return (
     <UserLayout>

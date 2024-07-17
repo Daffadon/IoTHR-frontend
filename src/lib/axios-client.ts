@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 export const axiosClient = axios.create({
-  baseURL: `${import.meta.env.VITE_APP_BASE_URL}/api`
+  baseURL: `${import.meta.env.VITE_APP_BASE_URL}/v1`
 });
 
 axiosClient.interceptors.request.use((config) => {
@@ -15,6 +15,7 @@ axiosClient.interceptors.response.use(
     return response;
   },
   (error) => {
+    console.log(error);
     const { response } = error;
     if (response.status === 401) {
       localStorage.removeItem('ACCESS_TOKEN');
