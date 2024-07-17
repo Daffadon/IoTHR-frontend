@@ -1,10 +1,10 @@
 export interface loginFormType {
-  username: string;
+  email: string;
   password: string;
 }
 export interface signupFormType {
-  username: string;
+  fullname: string;
   email: string;
   password: string;
-  rePassword: string;
+  confirmPassword: string;
 }
