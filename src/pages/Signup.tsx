@@ -1,49 +1,47 @@
 import { FormEvent, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { signupFormType } from '../data/dto/form';
-// import { axiosClient } from '../lib/axios-client';
-import { useUserContext } from '../context/userContext';
+import { axiosClient } from '../lib/axios-client';
 import GuestLayout from '../components/layout/GuestLayout';
 import { BsArrowRight } from 'react-icons/bs';
+import { ToastContainer } from 'react-toastify';
+import { errorNotification, successNotification } from '../components/toast/notification';
+import "react-toastify/dist/ReactToastify.css";
 
 const Signup = () => {
   const navigate = useNavigate();
-  const { setTokenToLocal, setUser } = useUserContext();
-  const [msg, setMsg] = useState<string[] | null>(null);
   const [form, setForm] = useState<signupFormType>({
     email: '',
-    username: '',
+    fullname: '',
     password: '',
-    rePassword: ''
+    confirmPassword: ''
   });
-
   const signupHandler = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      if (form.password !== form.rePassword) {
-        setMsg(['Your Password and Repeat Password Not Match']);
+      if (form.password !== form.confirmPassword) {
+        setForm((prev) => ({ ...prev, password: '', confirmPassword: '' }));
+        errorNotification("Password and Confirm Password not match");
         return;
       }
-      // const data = await axiosClient.post('/signup', { form });
-      setTokenToLocal('');
-      setUser({ name: '', role: '', validated: false });
-
-      navigate('/home');
-    } catch (error) {
-      console.log(error);
+      const { data } = await axiosClient.post('/auth/register', form);
+      if (data.message === 'success') {
+        successNotification("Register Success");
+        setTimeout(() => {
+          navigate('/');
+        }, 3500)
+      }
+    } catch (error: any) {
+      errorNotification(error.response.data.error)
     }
   };
   return (
     <GuestLayout>
-      <div className="grid place-items-center min-h-[90vh]">
+      <div className="flex justify-center flex-col items-center gap-5 min-h-[90vh]">
         <form
           className="flex flex-col justify-center items-center text-white min-h-[60vh] w-[22em] bg-blue-700 rounded-xl py-10 px-16"
           onSubmit={signupHandler}>
           <h1 className="mb-5 font-bold text-xl text-white">Signup</h1>
-          {msg &&
-            msg.map((msg) => {
-              return <p>{msg}</p>;
-            })}
           <label htmlFor="email" className="text-lg">
             Email
           </label>
@@ -54,22 +52,19 @@ const Signup = () => {
             value={form.email}
             onChange={(e) => {
               setForm((prev) => ({ ...prev, email: e.target.value }));
-              // setForm((prev) => {
-              //   return { ...prev, username: e.target.value };
-              // });
             }}
             className="rounded text-black mt-2 px-2 py-1 focus:outline-none"
           />
           <label htmlFor="username" className="mt-5 text-lg">
-            Username
+            Fullname
           </label>
           <input
             type="text"
-            name="username"
-            id="username"
-            value={form.username}
+            name="fullname"
+            id="fullname"
+            value={form.fullname}
             onChange={(e) => {
-              setForm((prev) => ({ ...prev, username: e.target.value }));
+              setForm((prev) => ({ ...prev, fullname: e.target.value }));
             }}
             className="rounded text-black mt-2 px-2 py-1 focus:outline-none"
           />
@@ -91,11 +86,11 @@ const Signup = () => {
           </label>
           <input
             type="password"
-            name="repassword"
-            id="repassword"
-            value={form.rePassword}
+            name="confirmPassword"
+            id="confirmPassword"
+            value={form.confirmPassword}
             onChange={(e) => {
-              setForm((prev) => ({ ...prev, rePassword: e.target.value }));
+              setForm((prev) => ({ ...prev, confirmPassword: e.target.value }));
             }}
             className=" rounded text-black mt-2 px-2 py-1 focus:outline-none"
           />
@@ -111,6 +106,7 @@ const Signup = () => {
             </div>
           </Link>
         </form>
+        <ToastContainer />P
       </div>
     </GuestLayout>
   );
