@@ -1,14 +1,15 @@
-import { createContext, useContext, useState } from 'react';
+import { createContext, useContext, useEffect, useState } from 'react';
 import { UserContextValue, contextType, userType } from '../data/dto/context';
+import { jwtDecode } from 'jwt-decode';
 
 const userContext = createContext<UserContextValue>({
   user: null,
   token: null,
-  setUser: () => {},
-  setTokenToLocal: () => {}
+  setUser: () => { },
+  setTokenToLocal: () => { }
 });
 
-const ContextProvider: React.FC<contextType> = ({ children }) => {
+const ContextProvider = ({ children }: contextType) => {
   const [user, setUser] = useState<userType | null>(null);
   const [token, setToken] = useState(localStorage.getItem('ACCESS_TOKEN'));
 
@@ -20,6 +21,12 @@ const ContextProvider: React.FC<contextType> = ({ children }) => {
       localStorage.removeItem('ACCESS_TOKEN');
     }
   };
+  useEffect(() => {
+    if (token) {
+      const userData: userType = jwtDecode(token);
+      setUser(userData)
+    }
+  }, [token])
 
   return (
     <userContext.Provider value={{ user, token, setUser, setTokenToLocal }}>

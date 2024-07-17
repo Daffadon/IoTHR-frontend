@@ -5,9 +5,9 @@ export interface contextType {
 }
 
 export interface userType {
-  name: string;
+  userId: number;
   role: string;
-  validated: boolean;
+  exp: number;
 }
 
 export interface UserContextValue {
