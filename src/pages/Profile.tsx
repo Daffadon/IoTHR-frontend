@@ -1,6 +1,5 @@
 import UserLayout from '../components/layout/UserLayout';
 import dummypict from '../assets/profpicdummy.png';
-import { optionsSelection } from '../data/page/analysis/options';
 import { useEffect, useState } from 'react';
 import { axiosClient } from '../lib/axios-client';
 import { errorNotification } from '../components/toast/notification';
@@ -9,15 +8,16 @@ interface ProfileProps {
   fullname: string;
   email: string;
 }
+export interface HistoryProps {
+  topicId: string;
+  topicName: string;
+}
 const Profile = () => {
   const [profile, setProfile] = useState<ProfileProps>()
+  const [history, setHistory] = useState<HistoryProps[]>()
   const getProfile = async () => {
     try {
-      const { data } = await axiosClient.get('/profile', {
-        headers: {
-          "Content-Type": "application/json"
-        }
-      })
+      const { data } = await axiosClient.get('/profile')
       if (data) {
         setProfile(data.data)
       }
@@ -25,8 +25,18 @@ const Profile = () => {
       errorNotification("Failed to fetch UserData")
     }
   }
+  const getHistory = async () => {
+    try {
+      const { data } = await axiosClient.get('/profile/history')
+      if (data) {
+        setHistory(data.data)
+      }
+    } catch (error) {
+      errorNotification("Failed to fetch History")
+    }
+  }
   useEffect(() => {
-    getProfile()
+    Promise.all([getProfile(), getHistory()])
   }, [])
   return (
     <UserLayout>
@@ -45,18 +55,18 @@ const Profile = () => {
         <table className="border-2 border-black rounded-md p-2 w-1/2">
           <thead>
             <tr className="">
-              <th className="w-1/2 border border-black py-2">Data Name</th>
+              <th className="w-1/2 border border-black py-2">Topic Name</th>
               <th className="w-1/2 border border-black py-2">Analyzed</th>
             </tr>
           </thead>
           <tbody>
-            {optionsSelection.map((option, index) => {
+            {history && history.map((topic) => {
               return (
-                <tr key={index} className="border border-black">
-                  <td className="w-1/2 border border-black text-center py-1">{option.label}</td>
-                  <td className="w-1/2 border border-black text-center py-1">
+                <tr key={topic.topicId} className="border border-black">
+                  <td className="w-1/2 border border-black text-center py-1">{topic.topicName}</td>
+                  {/* <td className="w-1/2 border border-black text-center py-1">
                     {option.analyzed ? 'V' : 'X'}
-                  </td>
+                  </td> */}
                 </tr>
               );
             })}
