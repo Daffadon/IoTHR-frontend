@@ -1,25 +1,73 @@
 
 import UserLayout from '../components/layout/UserLayout';
 import Select, { SingleValue } from 'react-select';
-import { optionsSelection } from '../data/page/analysis/options';
+// import { optionsSelection } from '../data/page/analysis/options';
 import { useEffect, useState } from 'react';
 import ReactECharts from 'echarts-for-react';
 import { setChartBarOption, setChartLineOption, setPlotOption } from '../feature/Record/chart-option';
+import { axiosClient } from '../lib/axios-client';
+import { HistoryProps } from './Profile';
+import { errorNotification } from '../components/toast/notification';
+
+interface SelectionOption {
+  value: string,
+  label: string
+}
 
 const History = () => {
-  const [selected, setSelected] = useState<JsonDatatype>(optionsSelection[0]);
-  const [optionSeries, setOptionSeries] = useState(setChartLineOption(selected));
-  const [optionBarSeries, setOptionBarSeries] = useState(setChartBarOption(selected));
-  const handleSelectChange = (selectedOption: SingleValue<JsonDatatype>) => {
+  const [history, setHistory] = useState<SelectionOption[]>([]);
+  const [optionsSelection, setOptionsSelection] = useState<JsonDatatype>();
+  const [selected, setSelected] = useState<SelectionOption>();
+  const [optionSeries, setOptionSeries] = useState<any>()
+  const [optionBarSeries, setOptionBarSeries] = useState<any>();
+  const handleSelectChange = (selectedOption: SingleValue<SelectionOption>) => {
     setSelected(selectedOption!);
+    getTopic()
   };
 
-  useEffect(() => {
-    setOptionSeries(setChartLineOption(selected));
-    setOptionBarSeries(setChartBarOption(selected));
-  }, [selected]);
+  const getHistory = async () => {
+    try {
+      const { data } = await axiosClient.get('/profile/history')
+      if (data) {
+        const newObj: SelectionOption[] = data.data.map((item: HistoryProps) => {
+          return { value: item.topicId, label: item.topicName }
+        })
+        setHistory(newObj)
+        setSelected(newObj[0])
+      }
+    } catch (error) {
+      errorNotification("Failed to fetch History")
+    }
+  }
 
-  const { N, S, V, F, Q } = selected.value.sample_plot;
+  const getTopic = async () => {
+    try {
+      const { data } = await axiosClient.get('/topic/' + selected?.value)
+      if (data) {
+        setOptionsSelection(data.topic)
+      }
+    } catch (error) {
+      errorNotification("Failed to fetch Topic")
+    }
+  }
+
+  useEffect(() => {
+    if (selected) {
+      getTopic()
+    }
+  }, [selected])
+
+  useEffect(() => {
+    if (!optionsSelection) return;
+    setOptionSeries(setChartLineOption(optionsSelection));
+    setOptionBarSeries(setChartBarOption(optionsSelection));
+  }, [optionsSelection])
+
+  useEffect(() => {
+    getHistory()
+  }, [])
+
+  const { N, S, V, F, Q } = optionsSelection!.sample_plot;
 
   return (
     <UserLayout>
@@ -29,16 +77,20 @@ const History = () => {
           isSearchable={false}
           value={selected}
           onChange={handleSelectChange}
-          options={optionsSelection}
-          className="w-1/3 border-black focus:outline-none focus-within::border-black max-h-[20vh]"
+          options={history}
+          className="w-1/3 border-black focus:outline-none focus-within::border-black max-h-[20vh] text-black"
         />
       </div>
       <div style={{ width: '100%', height: '400px' }}>
-        <ReactECharts option={optionSeries} style={{ width: '100%', height: '100%' }} notMerge={true} />
+        {optionSeries &&
+          <ReactECharts option={optionSeries} style={{ width: '100%', height: '100%' }} notMerge={true} />
+        }
       </div>
       <div className='flex justify-center'>
         <div style={{ width: '40%', height: '400px' }}>
-          <ReactECharts option={optionBarSeries} style={{ width: "100%", height: "100%" }} />
+          {optionBarSeries &&
+            <ReactECharts option={optionBarSeries} style={{ width: "100%", height: "100%" }} />
+          }
         </div>
       </div>
       <h1 className='text-center text-lg font-semibold pb-4'>Sample Plot</h1>
