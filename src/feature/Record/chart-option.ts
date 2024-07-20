@@ -1,10 +1,10 @@
 export const setChartLineOption = (selected: JsonDatatype) => {
-  const dataEcg = selected.value.ecgplot;
-  const classificationPin = selected.value.annotation;
+  const dataEcg = selected?.ecgplot;
+  const classificationPin = selected?.annotation;
   const optionSeries = [];
   for (const key in classificationPin) {
     const propertyName = key as keyof typeof classificationPin;
-    if (propertyName === 'N' || classificationPin[propertyName].length === 0) {
+    if (propertyName === 'N' || classificationPin[propertyName] === null) {
       continue;
     }
     optionSeries.push({
@@ -20,7 +20,7 @@ export const setChartLineOption = (selected: JsonDatatype) => {
       }
     });
   }
-  const seconds = Array.from({ length: dataEcg.length }, (_, i) => (i / 130).toFixed(3));
+  const seconds = Array.from({ length: dataEcg?.length }, (_, i) => (i / 130).toFixed(3));
 
   const opt = {
     title: {
@@ -62,8 +62,8 @@ export const setChartLineOption = (selected: JsonDatatype) => {
   return opt;
 };
 
-export const setChartBarOption = (selected: JsonDatatype) => {
-  const prediction = selected.value.prediction;
+export const setChartBarOption = (selected: JsonDatatype | undefined) => {
+  const prediction = selected?.prediction;
   const data = [];
   const keyData = [];
 
