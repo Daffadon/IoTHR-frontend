@@ -13,10 +13,10 @@ interface JsonDatatype {
     Q: never[] | number[][];
   };
   sample_plot: {
-    N: number[] | number[][];
-    S: number[] | number[][];
-    V: number[] | number[][];
-    F: number[] | number[][];
-    Q: number[] | number[][];
+    N: number[];
+    S: number[];
+    V: number[];
+    F: number[];
+    Q: number[];
   };
-} 
+}
