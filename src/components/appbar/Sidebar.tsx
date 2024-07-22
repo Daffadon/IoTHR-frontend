@@ -3,7 +3,13 @@ import icnlogo from '../../assets/icn-logo.svg';
 import { TbActivityHeartbeat } from 'react-icons/tb';
 import { axiosClient } from '../../lib/axios-client';
 import { errorNotification, successNotification } from '../toast/notification';
-const Sidebar = () => {
+import { FC } from 'react';
+
+interface SidebarProps {
+  classname?: string
+}
+
+const Sidebar: FC<SidebarProps> = ({ classname }) => {
   const navigate = useNavigate()
   const logout = async () => {
     try {
@@ -20,7 +26,7 @@ const Sidebar = () => {
     }
   };
   return (
-    <div className="w-1/6 max-h-screen sticky top-0 text-white border-right font-semibold backdrop-blur-xl bg-gradient-to-r from-[#1565c0] from-30% via-[#0E2FA6] via-60% bg-[#01579b] to-100%">
+    <div className={`w-1/6 max-h-screen sticky top-0 text-white border-right font-semibold backdrop-blur-xl bg-gradient-to-r from-[#1565c0] from-30% via-[#0E2FA6] via-60% bg-[#01579b] to-100% ${classname}`}>
       <img
         src={icnlogo}
         alt="logo"
