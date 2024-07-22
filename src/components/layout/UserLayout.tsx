@@ -1,24 +1,19 @@
-import { ReactNode, useEffect } from 'react';
-// import { useUserContext } from '../../context/userContext';
-// import { axiosClient } from '../../lib/axios-client';
+import { ReactNode } from 'react';
 import Sidebar from '../appbar/Sidebar';
 
 interface UserLayoutType {
   children: ReactNode;
+  record?: boolean
 }
 
-const UserLayout: React.FC<UserLayoutType> = ({ children }) => {
-  // const { setUser } = useUserContext();
-  useEffect(() => {
-    const getUserData = async () => {
-      // const { data } = await axiosClient.get('/user');
-      // setUser(data);
-    };
-    getUserData();
-  }, []);
+const UserLayout: React.FC<UserLayoutType> = ({ children, record }) => {
   return (
     <div className="flex w-full min-h-screen">
-      <Sidebar />
+      {!record ?
+        <Sidebar classname='z-0' />
+        :
+        <Sidebar />
+      }
       <div className="w-5/6 min-h-[100vh] relative">{children}</div>
     </div>
   );
