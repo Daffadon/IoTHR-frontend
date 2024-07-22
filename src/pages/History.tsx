@@ -13,6 +13,14 @@ interface SelectionOption {
   value: string,
   label: string
 }
+interface SamplePlotProps {
+  N: number[],
+  S: number[],
+  V: number[],
+  F: number[],
+  Q: number[]
+
+}
 
 const History = () => {
   const [history, setHistory] = useState<SelectionOption[]>([]);
@@ -20,6 +28,13 @@ const History = () => {
   const [selected, setSelected] = useState<SelectionOption>();
   const [optionSeries, setOptionSeries] = useState<any>()
   const [optionBarSeries, setOptionBarSeries] = useState<any>();
+  const [samplePlot, setSamplePlot] = useState<SamplePlotProps>({
+    N: [],
+    S: [],
+    V: [],
+    F: [],
+    Q: []
+  });
   const handleSelectChange = (selectedOption: SingleValue<SelectionOption>) => {
     setSelected(selectedOption!);
     getTopic()
@@ -44,6 +59,7 @@ const History = () => {
     try {
       const { data } = await axiosClient.get('/topic/' + selected?.value)
       if (data) {
+        console.log(data.topic)
         setOptionsSelection(data.topic)
       }
     } catch (error) {
@@ -61,13 +77,14 @@ const History = () => {
     if (!optionsSelection) return;
     setOptionSeries(setChartLineOption(optionsSelection));
     setOptionBarSeries(setChartBarOption(optionsSelection));
+    const { N, S, V, F, Q } = optionsSelection?.sample_plot;
+    setSamplePlot({ N, S, V, F, Q })
   }, [optionsSelection])
 
   useEffect(() => {
     getHistory()
   }, [])
 
-  const { N, S, V, F, Q } = optionsSelection!.sample_plot;
 
   return (
     <UserLayout>
@@ -95,20 +112,20 @@ const History = () => {
       </div>
       <h1 className='text-center text-lg font-semibold pb-4'>Sample Plot</h1>
       <div className='flex justify-center items-center w-full flex-wrap'>
-        {N.length > 0 && (
-          <ReactECharts option={setPlotOption(N, "N")} className='w-4/12' />
+        {samplePlot?.N.length > 0 && (
+          <ReactECharts option={setPlotOption(samplePlot?.N, "N")} className='w-4/12' />
         )}
-        {S.length > 0 && (
-          <ReactECharts option={setPlotOption(S, "S")} className='w-4/12' />
+        {samplePlot?.S.length > 0 && (
+          <ReactECharts option={setPlotOption(samplePlot?.S, "S")} className='w-4/12' />
         )}
-        {V.length > 0 && (
-          <ReactECharts option={setPlotOption(V, "V")} className='w-4/12' />
+        {samplePlot.V.length > 0 && (
+          <ReactECharts option={setPlotOption(samplePlot?.V, "V")} className='w-4/12' />
         )}
-        {F.length > 0 && (
-          <ReactECharts option={setPlotOption(F, "F")} className='w-4/12' />
+        {samplePlot.F.length > 0 && (
+          <ReactECharts option={setPlotOption(samplePlot?.F, "F")} className='w-4/12' />
         )}
-        {Q.length > 0 && (
-          <ReactECharts option={setPlotOption(Q, "Q")} className='w-4/12' />
+        {samplePlot.Q.length > 0 && (
+          <ReactECharts option={setPlotOption(samplePlot?.Q, "Q")} className='w-4/12' />
         )}
       </div>
     </UserLayout>
