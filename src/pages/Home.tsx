@@ -1,17 +1,15 @@
 import UserLayout from '../components/layout/UserLayout';
-import { useUserContext } from '../context/userContext';
 import { CgProfile } from 'react-icons/cg';
 import { VscGraphLine } from 'react-icons/vsc';
 import { FaQuestionCircle } from 'react-icons/fa';
 import { IoIosContact } from 'react-icons/io';
 import elipse from '../assets/ilustration/elipse.png';
 const Home = () => {
-  const { user } = useUserContext();
   return (
     <UserLayout>
       <div className="px-2 py-3 pt-8 min-h-full flex flex-col justify-center items-center">
         <h1 className="text-center font-semibold text-xl">
-          WELCOME TO DASHBOARD, {user?.name ?? 'DAFFA!'}
+          WELCOME TO DASHBOARD
         </h1>
         <p className="text-center">Here you can do these following things</p>
         <div className="flex justify-center"></div>

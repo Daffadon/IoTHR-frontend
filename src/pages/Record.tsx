@@ -84,7 +84,7 @@ const Record = () => {
 
   const startRecording = async (device: Device | undefined, stream: any) => {
     if (device?.character) {
-      var Init = [0x02, stream.id];
+      const Init = [0x02, stream.id];
       const BytesToSend = Init.concat(stream.code_start);
       await device.character.writeValue(new Uint8Array(BytesToSend));
     }
@@ -113,12 +113,12 @@ const Record = () => {
   }
 
   const printHeartRate = async (event: any) => {
-    var data = event.target.value.buffer;
+    const data = event.target.value.buffer;
     const samples = new Uint8Array(data.slice(10));
     const npoints = samples.byteLength / 3;
     const ECGdata = createArray(npoints);
     for (let offset = 0; offset < samples.byteLength; offset += 3) {
-      let i = offset / 3;
+      const i = offset / 3;
       ECGdata[i] = WordstoSignedInteger(samples.slice(offset, offset + 2), 8);
     }
     await sendECGData(ECGdata)
@@ -136,7 +136,7 @@ const Record = () => {
   const addDevice = async () => {
     try {
       setLoading(true)
-      let obj: any = [];
+      const obj: any = [];
 
       const num = Object.keys(obj).length + 1;
       const newdevice = await navigator.bluetooth.requestDevice({
@@ -182,7 +182,6 @@ const Record = () => {
   const renderer = ({ hours, minutes, seconds, completed }: CountdownRenderProps) => {
     if (completed) {
       setIsComplete(true)
-      return <span className='text-white text-4xl'>Time's up!</span>;
     } else {
       return (
         <div className='text-white text-4xl'>
@@ -220,7 +219,8 @@ const Record = () => {
     <>
       {onRecord && (
         <div className='absolute h-screen w-full bg-black z-10 opacity-95 flex justify-center items-center'>
-          <Countdown className='z-10' date={Date.now() + 60000}
+          <Countdown className='z-10'
+            date={Date.now() + 60000}
             renderer={renderer}>
           </Countdown>
         </div >

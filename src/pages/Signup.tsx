@@ -106,7 +106,7 @@ const Signup = () => {
             </div>
           </Link>
         </form>
-        <ToastContainer />P
+        <ToastContainer />
       </div>
     </GuestLayout>
   );
