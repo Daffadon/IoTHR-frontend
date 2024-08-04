@@ -1,9 +1,9 @@
 import { toast } from "react-toastify";
 
-export const successNotification = (message: string) => {
+export const successNotification = (message: string, time?: number) => {
   toast.success(message, {
     position: "bottom-right",
-    autoClose: 3000,
+    autoClose: time ?? 3000,
     hideProgressBar: false,
     closeOnClick: true,
     pauseOnHover: true,
