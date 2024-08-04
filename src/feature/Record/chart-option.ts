@@ -1,6 +1,6 @@
-export const setChartLineOption = (selected: JsonDatatype) => {
+export const setChartLineOption = (selected: TopicProps, featureSelected: PredictionProps) => {
   const dataEcg = selected?.ecgplot;
-  const classificationPin = selected?.annotation;
+  const classificationPin = featureSelected.annotation;
   const optionSeries = [];
   for (const key in classificationPin) {
     const propertyName = key as keyof typeof classificationPin;
@@ -62,7 +62,7 @@ export const setChartLineOption = (selected: JsonDatatype) => {
   return opt;
 };
 
-export const setChartBarOption = (selected: JsonDatatype | undefined) => {
+export const setChartBarOption = (selected: PredictionProps | undefined) => {
   const prediction = selected?.prediction;
   const data = [];
   const keyData = [];
@@ -75,7 +75,7 @@ export const setChartBarOption = (selected: JsonDatatype | undefined) => {
 
   const option = {
     title: {
-      text: 'Heart Rate Graphic',
+      text: 'Heart Rate Bar Graphic',
       left: 'center',
       top: '15  '
     },
