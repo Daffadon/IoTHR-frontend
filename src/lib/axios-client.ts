@@ -18,6 +18,7 @@ axiosClient.interceptors.response.use(
     const { response } = error;
     if (response.status === 401) {
       localStorage.removeItem('ACCESS_TOKEN');
+      window.location.href = '/login';
     }
     throw error;
   }

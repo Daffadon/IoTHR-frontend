@@ -1,5 +1,6 @@
 import { ReactNode } from 'react';
 import Sidebar from '../appbar/Sidebar';
+import { ToastContainer } from 'react-toastify';
 
 interface UserLayoutType {
   children: ReactNode;
@@ -15,6 +16,7 @@ const UserLayout: React.FC<UserLayoutType> = ({ children, record }) => {
         <Sidebar />
       }
       <div className="w-5/6 min-h-[100vh] relative">{children}</div>
+      <ToastContainer className="z-10" />
     </div>
   );
 };
