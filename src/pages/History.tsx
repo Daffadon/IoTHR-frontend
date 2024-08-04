@@ -1,33 +1,24 @@
 
 import UserLayout from '../components/layout/UserLayout';
 import Select, { SingleValue } from 'react-select';
-// import { optionsSelection } from '../data/page/analysis/options';
 import { useEffect, useState } from 'react';
 import ReactECharts from 'echarts-for-react';
 import { setChartBarOption, setChartLineOption, setPlotOption } from '../feature/Record/chart-option';
 import { axiosClient } from '../lib/axios-client';
-import { HistoryProps } from './Profile';
 import { errorNotification } from '../components/toast/notification';
+import { HistoryProps } from '../data/dto/profile';
 
-interface SelectionOption {
-  value: string,
-  label: string
-}
-interface SamplePlotProps {
-  N: number[],
-  S: number[],
-  V: number[],
-  F: number[],
-  Q: number[]
-
-}
 
 const History = () => {
   const [history, setHistory] = useState<SelectionOption[]>([]);
-  const [optionsSelection, setOptionsSelection] = useState<JsonDatatype>();
+  const [optionsSelection, setOptionsSelection] = useState<TopicProps>();
   const [selected, setSelected] = useState<SelectionOption>();
   const [optionSeries, setOptionSeries] = useState<any>()
+
   const [optionBarSeries, setOptionBarSeries] = useState<any>();
+  const [selectedFeature, setSelectedFeature] = useState<PredictionOptionProps>();
+  const [predictionOption, setPredictionOption] = useState<PredictionOptionProps[]>();
+  const [predictionData, setPredictionData] = useState<PredictionProps>();
   const [samplePlot, setSamplePlot] = useState<SamplePlotProps>({
     N: [],
     S: [],
@@ -37,7 +28,10 @@ const History = () => {
   });
   const handleSelectChange = (selectedOption: SingleValue<SelectionOption>) => {
     setSelected(selectedOption!);
-    getTopic()
+  };
+
+  const handleFeatureSelectChange = (selectedOption: SingleValue<SelectionOption>) => {
+    setSelectedFeature(selectedOption!);
   };
 
   const getHistory = async () => {
@@ -54,13 +48,38 @@ const History = () => {
       errorNotification("Failed to fetch History")
     }
   }
+  const getPrediction = async (topicId: string) => {
+    try {
+      const { data } = await axiosClient.get('/prediction/' + topicId)
+      if (data) {
+        const newObj: SelectionOption[] = data.data.map((item: PredictionOptionListProps) => {
+          return { value: item.predictionId, label: item.feature }
+        })
+        setPredictionOption(newObj)
+        setSelectedFeature(newObj[0])
+      }
+    } catch (error) {
+      errorNotification("Failed to fetch Prediction")
+    }
+  }
+
+  const getPredictionById = async (predictionId: string) => {
+    try {
+      const { data } = await axiosClient.get('/prediction/id/' + predictionId)
+      if (data) {
+        setPredictionData(data.data)
+      }
+    } catch (error) {
+      errorNotification("Failed to fetch Prediction")
+    }
+  }
 
   const getTopic = async () => {
     try {
       const { data } = await axiosClient.get('/topic/' + selected?.value)
       if (data) {
-        console.log(data.topic)
         setOptionsSelection(data.topic)
+        getPrediction(data.topic.id)
       }
     } catch (error) {
       errorNotification("Failed to fetch Topic")
@@ -68,18 +87,25 @@ const History = () => {
   }
 
   useEffect(() => {
+    if (predictionData && optionsSelection) {
+      setOptionSeries(setChartLineOption(optionsSelection, predictionData));
+      setOptionBarSeries(setChartBarOption(predictionData));
+      const { N, S, V, F, Q } = predictionData?.sample_plot;
+      setSamplePlot({ N, S, V, F, Q })
+    }
+  }, [predictionData])
+
+  useEffect(() => {
+    if (selectedFeature) {
+      getPredictionById(selectedFeature.value)
+    }
+  }, [selectedFeature])
+
+  useEffect(() => {
     if (selected) {
       getTopic()
     }
   }, [selected])
-
-  useEffect(() => {
-    if (!optionsSelection) return;
-    setOptionSeries(setChartLineOption(optionsSelection));
-    setOptionBarSeries(setChartBarOption(optionsSelection));
-    const { N, S, V, F, Q } = optionsSelection?.sample_plot;
-    setSamplePlot({ N, S, V, F, Q })
-  }, [optionsSelection])
 
   useEffect(() => {
     getHistory()
@@ -89,7 +115,7 @@ const History = () => {
   return (
     <UserLayout>
       <h1 className="py-2 font-bold text-2xl text-center">Heart Rate Graphic</h1>
-      <div className="flex justify-center items-center pb-5 focus:border-none">
+      <div className="flex gap-4 justify-center items-center py-5 focus:border-none">
         <Select
           isSearchable={false}
           value={selected}
@@ -97,7 +123,15 @@ const History = () => {
           options={history}
           className="w-1/3 border-black focus:outline-none focus-within::border-black max-h-[20vh] text-black"
         />
+        <Select
+          isSearchable={false}
+          value={selectedFeature}
+          onChange={handleFeatureSelectChange}
+          options={predictionOption}
+          className="w-1/3 border-black focus:outline-none focus-within::border-black max-h-[20vh] text-black"
+        />
       </div>
+      {optionsSelection && <p className='text-center font-semibold'>Recording Time: <span className='text-blue-600'>{optionsSelection?.recordTime}</span></p>}
       <div style={{ width: '100%', height: '400px' }}>
         {optionSeries &&
           <ReactECharts option={optionSeries} style={{ width: '100%', height: '100%' }} notMerge={true} />
