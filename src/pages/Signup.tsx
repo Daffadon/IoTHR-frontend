@@ -4,7 +4,6 @@ import { signupFormType } from '../data/dto/form';
 import { axiosClient } from '../lib/axios-client';
 import GuestLayout from '../components/layout/GuestLayout';
 import { BsArrowRight } from 'react-icons/bs';
-import { ToastContainer } from 'react-toastify';
 import { errorNotification, successNotification } from '../components/toast/notification';
 import "react-toastify/dist/ReactToastify.css";
 
@@ -26,10 +25,10 @@ const Signup = () => {
       }
       const { data } = await axiosClient.post('/auth/register', form);
       if (data.message === 'success') {
-        successNotification("Register Success");
+        successNotification("Register Success", 1000);
         setTimeout(() => {
-          navigate('/');
-        }, 3500)
+          navigate('/login');
+        }, 1500)
       }
     } catch (error: any) {
       errorNotification(error.response.data.error)
@@ -106,7 +105,6 @@ const Signup = () => {
             </div>
           </Link>
         </form>
-        <ToastContainer />
       </div>
     </GuestLayout>
   );

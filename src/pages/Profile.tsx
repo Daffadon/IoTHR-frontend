@@ -3,15 +3,8 @@ import dummypict from '../assets/profpicdummy.png';
 import { useEffect, useState } from 'react';
 import { axiosClient } from '../lib/axios-client';
 import { errorNotification } from '../components/toast/notification';
-import { ToastContainer } from 'react-toastify';
-interface ProfileProps {
-  fullname: string;
-  email: string;
-}
-export interface HistoryProps {
-  topicId: string;
-  topicName: string;
-}
+import { HistoryProps, ProfileProps } from '../data/dto/profile';
+
 const Profile = () => {
   const [profile, setProfile] = useState<ProfileProps>()
   const [history, setHistory] = useState<HistoryProps[]>()
@@ -73,7 +66,6 @@ const Profile = () => {
           </tbody>
         </table>
       </div>
-      <ToastContainer />
     </UserLayout>
   );
 };

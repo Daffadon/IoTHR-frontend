@@ -6,7 +6,6 @@ import GuestLayout from '../components/layout/GuestLayout';
 import { BsArrowLeft } from 'react-icons/bs';
 import { axiosClient } from '../lib/axios-client';
 import { errorNotification, successNotification } from '../components/toast/notification';
-import { ToastContainer } from 'react-toastify';
 
 const Login = () => {
   const { setTokenToLocal } = useUserContext();
@@ -72,7 +71,6 @@ const Login = () => {
             <p>Signup</p>
           </Link>
         </form>
-        <ToastContainer />
       </div>
     </GuestLayout>
   );
