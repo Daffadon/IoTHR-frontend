@@ -7,3 +7,5 @@ services:
     container_name: fe_container
     ports:
       - '80:80'
+      - '443:80'
+      
