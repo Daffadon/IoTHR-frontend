@@ -1,11 +1,11 @@
 import { FormEvent, useState } from 'react';
-import { loginFormType } from '../data/dto/form';
+import { loginFormType } from '../../data/dto/form';
 import { Link } from 'react-router-dom';
-import { useUserContext } from '../context/userContext';
-import GuestLayout from '../components/layout/GuestLayout';
+import { useUserContext } from '../../context/userContext';
+import GuestLayout from '../../components/layout/GuestLayout';
 import { BsArrowLeft } from 'react-icons/bs';
-import { axiosClient } from '../lib/axios-client';
-import { errorNotification, successNotification } from '../components/toast/notification';
+import { axiosClient } from '../../lib/axios-client';
+import { errorNotification, successNotification } from '../../components/toast/notification';
 
 const Login = () => {
   const { setTokenToLocal } = useUserContext();
@@ -44,7 +44,7 @@ const Login = () => {
             onChange={(e) => {
               setForm((prev) => ({ ...prev, email: e.target.value }));
             }}
-            className="rounded text-black mt-2 focus:outline-none px-2 py-1"
+            className="rounded text-black mt-2 focus:outline-none px-2 py-1 w-4/5"
           />
           <label htmlFor="password" className="mt-5 text-lg">
             Password
@@ -57,7 +57,7 @@ const Login = () => {
             onChange={(e) => {
               setForm((prev) => ({ ...prev, password: e.target.value }));
             }}
-            className=" rounded text-black mt-2 focus:outline-none px-2 py-1"
+            className=" rounded text-black mt-2 focus:outline-none px-2 py-1 w-4/5"
           />
           <button
             type="submit"

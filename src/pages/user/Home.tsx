@@ -1,12 +1,12 @@
-import UserLayout from '../components/layout/UserLayout';
+import UserLayout from '../../components/layout/UserLayout';
 import { CgProfile } from 'react-icons/cg';
 import { VscGraphLine } from 'react-icons/vsc';
 import { FaQuestionCircle } from 'react-icons/fa';
 import { IoIosContact } from 'react-icons/io';
-import elipse from '../assets/ilustration/elipse.png';
+import elipse from '../../assets/ilustration/elipse.png';
 import { useEffect, useState } from 'react';
-import { axiosClient } from '../lib/axios-client';
-import { ProfileProps } from '../data/dto/profile';
+import { axiosClient } from '../../lib/axios-client';
+import { ProfileProps } from '../../data/dto/profile';
 const Home = () => {
   const [profile, setProfile] = useState<ProfileProps>()
   const getProfile = async () => {

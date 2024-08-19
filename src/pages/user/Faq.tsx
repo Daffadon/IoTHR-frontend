@@ -1,6 +1,6 @@
 import { Accordion } from 'flowbite-react';
-import UserLayout from '../components/layout/UserLayout';
-import { qnaData } from '../data/page/faq/qna';
+import UserLayout from '../../components/layout/UserLayout';
+import { qnaData } from '../../data/page/faq/qna';
 
 export default function Faq() {
   return (
@@ -20,7 +20,7 @@ export default function Faq() {
                       {item.answer}
                       {item.link ? (
                         <span className="hover:text-black duration-75">
-                          <a href={item.link}>{item.link}</a>
+                          <a target='_blank' href={item.link}>{item.link}</a>
                         </span>
                       ) : (
                         ''

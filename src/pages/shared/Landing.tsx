@@ -1,19 +1,19 @@
-import GuestLayout from '../components/layout/GuestLayout';
-import hr from '../assets/ilustration/hrilustration.svg';
-import tech from '../assets/ilustration/tech_ilustration.png';
-import elipse from '../assets/ilustration/elipse.png';
-import { steps } from '../data/page/landing/characteristic';
-import Card from '../components/card/Card';
+import GuestLayout from '../../components/layout/GuestLayout';
+import hr from '../../assets/ilustration/hrilustration.svg';
+import tech from '../../assets/ilustration/tech_ilustration.png';
+import elipse from '../../assets/ilustration/elipse.png';
+import { steps } from '../../data/page/landing/characteristic';
+import Card from '../../components/card/Card';
 import { Link } from 'react-router-dom';
-import bg from '../assets/background/section1_landing.svg';
+import bg from '../../assets/background/section1_landing.svg';
 const Landing = () => {
   return (
     <GuestLayout>
       <div className="flex flex-col">
         <div className="flex justify-center items-center h-[85vh] py-[10em] relative overflow-hidden">
-          <img src={bg} alt="elipse" className="absolute -z-10 -right-52 -top-10 w-1/2 h-1/2" />
+          <img src={bg} alt="elipse" className="absolute -z-10 -right-52 -top-10 w-1/2 h-1/2" fetchPriority='low' />
           <div className="w-1/2 flex justify-center items-center ">
-            <img src={hr} alt="Ilustrasi" />
+            <img src={hr} alt="Ilustrasi" fetchPriority='high' />
           </div>
           <div className="w-1/2 px-10">
             <h2 className="text-4xl font-bold text-blue-800">Let's Check Your Heartbeat</h2>
@@ -27,7 +27,7 @@ const Landing = () => {
         <div className="w-[40%] h-2 bg-blue-700 rounded mx-auto animate-bounce"></div>
       </div>
       <div className="flex justify-start items-center flex-col min-h-[100vh] relative">
-        <img src={tech} alt="" />
+        <img src={tech} alt="" fetchPriority='low' />
         <p className="w-9/12 text-center mt-12 text-lg">
           Introducing our cutting-edge arrhythmia detection product - a wearable marvel that
           prioritizes your heart health. Equipped with advanced sensors, it seamlessly monitors your
@@ -38,6 +38,7 @@ const Landing = () => {
         </p>
         <img src={elipse} alt="elipse" className="absolute bottom-24 left-24 w-32 h-40" />
         <img
+          fetchPriority='low'
           src={elipse}
           alt="elipse"
           className="absolute bottom-72 right-24 w-32 h-40 rotate-180"

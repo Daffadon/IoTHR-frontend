@@ -1,17 +1,19 @@
 import { FormEvent, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { signupFormType } from '../data/dto/form';
-import { axiosClient } from '../lib/axios-client';
-import GuestLayout from '../components/layout/GuestLayout';
+import { signupFormType } from '../../data/dto/form';
+import { axiosClient } from '../../lib/axios-client';
+import GuestLayout from '../../components/layout/GuestLayout';
 import { BsArrowRight } from 'react-icons/bs';
-import { errorNotification, successNotification } from '../components/toast/notification';
+import { errorNotification, successNotification } from '../../components/toast/notification';
 import "react-toastify/dist/ReactToastify.css";
+import { Datepicker } from 'flowbite-react';
 
 const Signup = () => {
   const navigate = useNavigate();
   const [form, setForm] = useState<signupFormType>({
     email: '',
     fullname: '',
+    birthdate: '',
     password: '',
     confirmPassword: ''
   });
@@ -38,7 +40,7 @@ const Signup = () => {
     <GuestLayout>
       <div className="flex justify-center flex-col items-center gap-5 min-h-[90vh]">
         <form
-          className="flex flex-col justify-center items-center text-white min-h-[60vh] w-[22em] bg-blue-700 rounded-xl py-10 px-16"
+          className="flex flex-col justify-center items-center text-white min-h-[60vh] py-5 w-[22em] bg-blue-700 rounded-xl"
           onSubmit={signupHandler}>
           <h1 className="mb-5 font-bold text-xl text-white">Signup</h1>
           <label htmlFor="email" className="text-lg">
@@ -52,7 +54,7 @@ const Signup = () => {
             onChange={(e) => {
               setForm((prev) => ({ ...prev, email: e.target.value }));
             }}
-            className="rounded text-black mt-2 px-2 py-1 focus:outline-none"
+            className="rounded text-black mt-2 px-2 py-1 focus:outline-none w-4/5"
           />
           <label htmlFor="username" className="mt-5 text-lg">
             Fullname
@@ -65,8 +67,21 @@ const Signup = () => {
             onChange={(e) => {
               setForm((prev) => ({ ...prev, fullname: e.target.value }));
             }}
-            className="rounded text-black mt-2 px-2 py-1 focus:outline-none"
+            className="rounded text-black mt-2 px-2 py-1 focus:outline-none w-4/5"
           />
+          <label htmlFor="birthdate" className="mt-5 text-lg">
+            Birth Date
+          </label>
+          <Datepicker
+            style={{ outline: 'none', height: '2.25rem', borderRadius: '0.25rem' }}
+            className='mt-2 px-2 py-1 w-5/6'
+            name="birthdate"
+            id="birthdate"
+            minDate={new Date(1900, 0, 1)}
+            maxDate={new Date()}
+            onSelectedDateChanged={(e) => {
+              setForm(prev => ({ ...prev, birthdate: e.toLocaleDateString() }))
+            }} />
           <label htmlFor="password" className="mt-5 text-lg">
             Password
           </label>
@@ -78,7 +93,7 @@ const Signup = () => {
             onChange={(e) => {
               setForm((prev) => ({ ...prev, password: e.target.value }));
             }}
-            className=" rounded text-black mt-2 px-2 py-1 focus:outline-none"
+            className=" rounded text-black mt-2 px-2 py-1 focus:outline-none w-4/5"
           />
           <label htmlFor="repassword" className="mt-5 text-lg">
             Confirm Password
@@ -91,7 +106,7 @@ const Signup = () => {
             onChange={(e) => {
               setForm((prev) => ({ ...prev, confirmPassword: e.target.value }));
             }}
-            className=" rounded text-black mt-2 px-2 py-1 focus:outline-none"
+            className=" rounded text-black mt-2 px-2 py-1 focus:outline-none w-4/5"
           />
           <button
             type="submit"
