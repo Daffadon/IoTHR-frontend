@@ -1,20 +1,21 @@
 import { createBrowserRouter, Navigate, RouterProvider } from 'react-router-dom';
-import Landing from '../pages/Landing';
-import NotFound from '../pages/NotFound';
+import Landing from '../pages/shared/Landing';
+import NotFound from '../pages/shared/NotFound';
 import PublicRoute from './visibility/PublicRoute';
 import PrivateRoute from './visibility/PrivateRoute';
-import Login from '../pages/Login';
-import Home from '../pages/Home';
-import AdminRoute from './role/AdminRoute';
+import Login from "../pages/shared/Login";
+import Home from '../pages/user/Home';
 import UserRoute from './role/UserRoute';
-import Admin from '../pages/Admin';
-import User from '../pages/User';
-import Signup from '../pages/Signup';
-import Profile from '../pages/Profile';
-import Faq from '../pages/Faq';
-import Contact from '../pages/Contact';
-import History from '../pages/History';
-import Record from '../pages/Record';
+import Signup from '../pages/shared/Signup';
+import Profile from '../pages/shared/Profile';
+import Faq from '../pages/user/Faq';
+import Contact from '../pages/user/Contact';
+import History from '../pages/user/History';
+import Record from '../pages/user/Record';
+import DoctorRoute from './role/DoctorRoute';
+import Patient from '../pages/doctor/Patient';
+import PatientDetail from '../pages/doctor/PatientDetail';
+import Analyze from '../pages/doctor/Analyze';
 
 const createRouter = createBrowserRouter([
   {
@@ -40,16 +41,28 @@ const createRouter = createBrowserRouter([
     element: <PrivateRoute />,
     children: [
       {
+        path: '/profile',
+        element: <Profile />
+      },
+      {
         path: '/',
-        element: <AdminRoute />,
+        element: <DoctorRoute />,
         children: [
           {
             path: '/',
-            element: <Navigate to="/admin" />
+            element: <Navigate to="/patient" />
           },
           {
-            path: '/admin',
-            element: <Admin />
+            path: '/patient',
+            element: <Patient />
+          },
+          {
+            path: '/patient/:userId',
+            element: <PatientDetail />
+          },
+          {
+            path: '/analyze/:topicId',
+            element: <Analyze />
           }
         ]
       },
@@ -62,16 +75,8 @@ const createRouter = createBrowserRouter([
             element: <Navigate to="/home" />
           },
           {
-            path: '/user',
-            element: <User />
-          },
-          {
             path: '/home',
             element: <Home />
-          },
-          {
-            path: '/profile',
-            element: <Profile />
           },
           {
             path: '/record',
@@ -90,7 +95,7 @@ const createRouter = createBrowserRouter([
             element: <Contact />
           }
         ]
-      }
+      },
     ]
   },
   {
