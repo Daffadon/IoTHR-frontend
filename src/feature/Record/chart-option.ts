@@ -1,5 +1,5 @@
 export const setChartLineOption = (selected: TopicProps, featureSelected: PredictionProps) => {
-  const dataEcg = selected?.ecgplot;
+  const dataEcg = selected?.ecg_plot;
   const classificationPin = featureSelected.annotation;
   const optionSeries = [];
   for (const key in classificationPin) {

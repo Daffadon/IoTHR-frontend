@@ -26,6 +26,6 @@ export const qnaData = [
     id: 5,
     question: 'Is It Just The Sensor that We Need?',
     answer:
-      'In addition to the sensor, you will need middleware to use this application. Please contact the administrator for further information.'
+      'Yes, the sensor is the only tool needed to check the heart rate. the sensor will be connected to the application using bluetooth to record the heart rate. You can try it in the record tab '
   }
 ];

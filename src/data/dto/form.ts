@@ -5,6 +5,7 @@ export interface loginFormType {
 export interface signupFormType {
   fullname: string;
   email: string;
+  birthdate: string;
   password: string;
   confirmPassword: string;
 }

@@ -1,8 +1,16 @@
 interface TopicProps {
-  name: string;
-  date: string;
-  ecgplot: number[];
-  recordTime: string;
+  topic: {
+    name: string;
+    date: string;
+    recordTime: string;
+    analyzed: boolean;
+    analysis: {
+      doctorId: string;
+      doctorName: string;
+      comment: string[];
+    }[];
+  };
+  ecg_plot: number[];
 }
 
 interface SamplePlotProps {
