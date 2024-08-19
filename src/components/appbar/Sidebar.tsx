@@ -1,5 +1,4 @@
 import { NavLink, useNavigate } from 'react-router-dom';
-import icnlogo from '../../assets/icn-logo.svg';
 import { TbActivityHeartbeat } from 'react-icons/tb';
 import { axiosClient } from '../../lib/axios-client';
 import { errorNotification, successNotification } from '../toast/notification';
@@ -27,11 +26,6 @@ const Sidebar: FC<SidebarProps> = ({ classname }) => {
   };
   return (
     <div className={`w-1/6 max-h-screen sticky top-0 text-white border-right font-semibold backdrop-blur-xl bg-gradient-to-r from-[#1565c0] from-30% via-[#0E2FA6] via-60% bg-[#01579b] to-100% ${classname}`}>
-      <img
-        src={icnlogo}
-        alt="logo"
-        className="absolute top-[50%] left-[50%] w-[80%] translate-x-[-50%] translate-y-[-50%] -z-10"
-      />
       <div className=" w-full max-h-screen h-screen bg-opacity-50">
         <div className="h-[3em] mb-[1em] flex justify-center items-center text-black bg-gradient-to-r from-blue-500 from-30% via-[#03A9F4] via-60% bg-[#0277BD] to-100%">
           <TbActivityHeartbeat size={50} />
