@@ -1,4 +1,4 @@
-import { NavLink, useNavigate } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import icnlogo from '../../assets/icn-logo.svg';
 import { TbActivityHeartbeat } from 'react-icons/tb';
 import { axiosClient } from '../../lib/axios-client';
@@ -10,15 +10,13 @@ interface SidebarProps {
 }
 
 const DoctorSidebar: FC<SidebarProps> = ({ classname }) => {
-  const navigate = useNavigate()
   const logout = async () => {
     try {
       const logoutBackend = await axiosClient.post("/auth/logout");
       if (logoutBackend.status === 200) {
         successNotification("Logout Success");
-        setTimeout(() => {
-          navigate('/')
-        }, 3500)
+        localStorage.removeItem('ACCESS_TOKEN');
+        window.location.href = '/login';
       }
       localStorage.removeItem('ACCESS_TOKEN');
     } catch (error: any) {
@@ -49,13 +47,11 @@ const DoctorSidebar: FC<SidebarProps> = ({ classname }) => {
         </div>
 
         <div className="flex justify-center items-end h-1/2 ">
-          <a href="/" className="w-full flex justify-center">
-            <button
-              onClick={logout}
-              className="bg-gradient-to-r from-blue-500 from-30% via-[#03A9F4] via-60% bg-[#0277BD] to-100% w-[60%] text-black text-center py-2 font-extrabold rounded-lg hover:bg-[#40c4ff] hover:text-white duration-200">
-              Logout
-            </button>
-          </a>
+          <button
+            onClick={logout}
+            className="bg-gradient-to-r from-blue-500 from-30% via-[#03A9F4] via-60% bg-[#0277BD] to-100% w-[60%] text-black text-center py-2 font-extrabold rounded-lg hover:bg-[#40c4ff] hover:text-white duration-200">
+            Logout
+          </button>
         </div>
       </div>
     </div>
