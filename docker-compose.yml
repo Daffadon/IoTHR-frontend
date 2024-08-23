@@ -1,11 +1,11 @@
 version: '3'
 services:
-  fe:
+  fe-app:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: fe_container
+    container_name: frontend
     ports:
       - '80:80'
       - '443:80'
-      
+    restart: always
