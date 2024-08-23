@@ -10,7 +10,6 @@ import { createArray } from '../../utils/create-array';
 import { WordstoSignedInteger } from '../../utils/words-to-integer';
 import { stream } from '../../feature/Record/stream';
 import { Device, devices, DeviceType } from '../../data/dto/record';
-import { useNavigate } from 'react-router-dom';
 import { connectWebSocket, disconnectWebSocket, sendECGData } from '../../utils/socket-connection';
 import { useUserContext } from '../../context/userContext';
 
@@ -20,7 +19,6 @@ interface FormRecordProps {
   topicId?: string
 }
 const Record = () => {
-  const navigate = useNavigate()
   const [form, setForm] = useState<null | FormRecordProps>(
     {
       topicName: '',
@@ -105,7 +103,6 @@ const Record = () => {
     setIsComplete(false)
     setForm(null)
     setDevice(null)
-    navigate('/history')
     setTimeout(() => {
       window.location.reload()
     }, 2000)
