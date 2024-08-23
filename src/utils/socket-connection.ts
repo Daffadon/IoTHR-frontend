@@ -14,7 +14,7 @@ export function disconnectWebSocket(topicId: string, jwt: string | null) {
 
 export function connectWebSocket() {
   if (!ws || ws.readyState === WebSocket.CLOSED) {
-    ws = new WebSocket('ws://localhost:8000/ecg');
+    ws = new WebSocket(import.meta.env.VITE_APP_SOCKET_URL);
 
     ws.onopen = () => {
       console.log('WebSocket connection opened');
@@ -25,8 +25,6 @@ export function connectWebSocket() {
     };
 
     ws.onmessage = (event) => {
-      console.log('Received message:', event.data);
-
       try {
         sequence = parseInt(event.data);
       } catch (e) {
@@ -45,7 +43,7 @@ export function connectWebSocket() {
 }
 
 export function sendECGData(data: any, topicId: string) {
-  const packet = { type: 'ecg ', ECGPlot: data, topicId: topicId, sequence: sequence }; 
+  const packet = { type: 'ecg ', ECGPlot: data, topicId: topicId, sequence: sequence };
   try {
     if (ws && ws.readyState === WebSocket.OPEN) {
       ws.send(JSON.stringify(packet));
