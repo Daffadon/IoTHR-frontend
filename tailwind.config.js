@@ -9,6 +9,9 @@ export default {
     extend: {
       backgroundImage: {
         'landing': "url('src/assets/background/section1_landing.svg')",
+      },
+      fontFamily:{
+        poppins: ['poppinsFont', 'poppins'],
       }
     },
   },
